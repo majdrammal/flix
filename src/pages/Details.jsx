@@ -15,6 +15,18 @@ const Details = () => {
     const [movieDetails, setMovieDetails] = useState()
     const [loading, setLoading] = useState(true)
 
+    let isLiked = false
+    function liked() {
+        if (!isLiked) {
+            document.querySelector(".movie__details").classList += ' like__button--clicked'
+            isLiked = true
+        } 
+        else {
+            document.querySelector(".movie__details").classList.remove('like__button--clicked')
+            isLiked = false
+        }
+    }
+
     async function getMovieDetails() {
         setLoading(true)
         const promise = await fetch(`https://www.omdbapi.com/?apikey=e9de4a78&i=${id}`)
@@ -59,6 +71,7 @@ const Details = () => {
                      </>  
                      )     
                     }
+                    <FontAwesomeIcon icon="fa-solid fa-heart" className="like__button" onClick={liked}/>
                 </div>
             </div>
             <Copyright />

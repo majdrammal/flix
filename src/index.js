@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faMagnifyingGlass, faSpinner, faLeftLong } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faSpinner, faLeftLong, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faTwitter, faInstagram, faImdb } from '@fortawesome/free-brands-svg-icons';
 
-library.add(faTwitter, faInstagram, faMagnifyingGlass, faSpinner, faLeftLong, faImdb)
+library.add(faTwitter, faInstagram, faMagnifyingGlass, faSpinner, faLeftLong, faImdb, faHeart)
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
