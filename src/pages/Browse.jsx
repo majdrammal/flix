@@ -40,7 +40,8 @@ const Browse = () => {
             <InputChildren 
                 type="text" 
                 className="search__input" 
-                placeholder="Search by Title..." 
+                placeholder="Search by Title..."
+                value={searchTitle} 
                 onChange={(event) => setSearchTitle(event.target.value)}
                 onKeyPress={(event) => event.key === 'Enter' && newSearch()}>
                     <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" className="search__icon" onClick={newSearch} />
@@ -65,7 +66,7 @@ const Browse = () => {
                             </div>
                         ))
                     ) : ( moviesData.map(movie => (
-                        <Movie img={movie.Poster} title={movie.Title} year={movie.Year} id={movie.imdbID}/>
+                        <Movie img={movie.Poster} title={movie.Title} year={movie.Year} id={movie.imdbID} type={movie.Type}/>
                     )))
                 }
                 </div>
