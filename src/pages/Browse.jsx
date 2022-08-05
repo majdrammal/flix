@@ -25,7 +25,7 @@ const Browse = () => {
         setLoading(true)
         const promise = await fetch(`https://www.omdbapi.com/?apikey=e9de4a78&s=${searchTitle}`)
         const { Search } = await promise.json()
-        setMoviesData(Search.slice(0, 8))
+        setMoviesData(Search.filter((movie) => movie.Poster !== 'N/A').slice(0, 8))
         setLoading(false)
     }
 

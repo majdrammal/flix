@@ -4,11 +4,7 @@ const MovieInfo = ({ data, type, imdb, rotten, meta }) => {
     return (
         <>
             <div className="movie__details--left">
-                {
-                    data.Poster !== 'N/A' ? <img src={data.Poster} alt="" className="movie__details--img" />
-                    : <img src={"https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930"} alt="" className="movie__details--no-img" />
-                }
-                
+                <img src={data.Poster} alt="" className="movie__details--img" />
             </div>
             <div className="movie__details--right">
                 <h1 className="movie__details--title">{data.Title}</h1>
@@ -17,6 +13,7 @@ const MovieInfo = ({ data, type, imdb, rotten, meta }) => {
                 <h4 className="movie__details--director">Director: {data.Director}</h4>
                 <h4 className="movie__details--actors">Starring: {data.Actors}</h4>
                 <h4 className="movie__details--genre">Genre: {data.Genre}</h4>
+                <h4 className="movie__details--languages">Languages: {data.Language}</h4>
                 <h4 className="movie__details--runtime">Runtime: {data.Runtime}</h4>
                 <div className="ratings">
                     <p className="imdb__rating">

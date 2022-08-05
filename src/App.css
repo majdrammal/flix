@@ -400,6 +400,7 @@ nav {
 */
 
 #details {
+  position: relative;
   width: 100%;
   background-color: #242424;
   min-height: 100vh;
@@ -452,6 +453,7 @@ nav {
   border: 1px solid rgba(255, 255, 255, 0.079);
   border-radius: 20px;
   background-color: #7a7a7a18;
+  margin-bottom: 50px;
 }
 
 .movie__details--left {
@@ -489,7 +491,7 @@ nav {
   max-width: 80%;
 }
 
-.movie__details--director, .movie__details--actors, .movie__details--genre, .movie__details--runtime {
+.movie__details--director, .movie__details--actors, .movie__details--genre, .movie__details--languages, .movie__details--runtime {
   font-size: 20px;
   font-weight: 300;
 }
@@ -538,35 +540,51 @@ nav {
 
 /* DETAILS SKELETON */
 
+.movie__details--skeleton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  margin: 0 auto;
+  color: white;
+}
+
 .movie__details--img--skeleton {
-  height: 100px;
-  width: 160px;
+  height: 400px;
+  width: 260px;
   background-color: rgba(211, 211, 211, 0.668);
 }
 
 .movie__details--title--skeleton {
-  width: 300px;
-  height: 15px;
+  width: 200px;
+  height: 30px;
   background-color: rgba(211, 211, 211, 0.668);
 }
 
 .movie__details--year--skeleton {
   width: 100px;
-  height: 10px;
+  height: 15px;
   background-color: rgba(211, 211, 211, 0.668);
-  margin: 10px 0 20px 0;
+  margin: 30px 0 60px 0;
+}
+
+.movie__details--plot-skeleton {
+  width: 400px;
+  height: 60px;
+  background-color: rgba(211, 211, 211, 0.668);
 }
 
 .movie__details--info--skeleton {
-  width: 200px;
-  height: 30px;
+  width: 160px;
+  height: 100px;
   background-color: rgba(211, 211, 211, 0.668);
-  margin-bottom: 20px;
+  margin: 40px 0;
 }
 
 .movie__details--ratings--skeleton {
   width: 100px; 
-  height: 10px;
+  height: 15px;
+  background-color: rgba(211, 211, 211, 0.668);
 }
 
 /* 
