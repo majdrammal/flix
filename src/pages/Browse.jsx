@@ -17,7 +17,7 @@ const Browse = () => {
     let navigate = useNavigate()
 
     function newSearch() {
-        navigate(`/browse/${searchTitle}`)
+        navigate(`/${searchTitle}`)
         getMovies()
     }
 

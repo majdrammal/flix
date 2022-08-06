@@ -9,7 +9,7 @@ const SearchBar = () => {
     const [search, setSearch] = useState()
 
     function searchTitle() {
-        navigate(`/browse/${search}`)
+        navigate(`/${search}`)
     }
     
     return (
