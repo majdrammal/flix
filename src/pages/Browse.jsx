@@ -1,13 +1,25 @@
-import { faHeartPulse } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import InputChildren from 'react-input-children/lib';
 import Nav from '../components/Nav';
-import Copyright from '../components/ui/Copyright';
+import Copyright from '../components/Copyright';
 import Movie from '../components/ui/Movie';
+import { auth } from '../firebase-config';
+import { onAuthStateChanged } from 'firebase/auth';
 
 const Browse = () => {
+
+    const [user, setUser] = useState()
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            // setLoading(false)
+            if (user) {
+            setUser(user)
+            }
+        })
+    }, []) 
 
     const { title } = useParams()
     const [searchTitle, setSearchTitle] = useState(title)

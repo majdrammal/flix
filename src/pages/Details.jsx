@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Nav from '../components/Nav';
-import Copyright from '../components/ui/Copyright';
+import Copyright from '../components/Copyright';
 import MovieInfo from '../components/ui/MovieInfo';
 import rottenTomatoes from '../assets/rotten tomatoes.png'
 import imdb from '../assets/imdb.png'
@@ -10,8 +10,8 @@ import metacritic from '../assets/metacritic.png'
 
 const Details = () => {
 
-    const { id } = useParams()
-    const { type } = useParams()
+    const id = JSON.parse(localStorage.getItem('id'))
+    const type = localStorage.getItem('type')
     const [movieDetails, setMovieDetails] = useState()
     const [loading, setLoading] = useState(true)
 
@@ -31,6 +31,7 @@ const Details = () => {
         setLoading(true)
         const promise = await fetch(`https://www.omdbapi.com/?apikey=e9de4a78&i=${id}`)
         const data = await promise.json()
+        console.log(data)
         setMovieDetails(data)
         setLoading(false)
     }

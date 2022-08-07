@@ -1,9 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Nav from '../components/Nav';
-import Copyright from '../components/ui/Copyright';
+import Copyright from '../components/Copyright';
 import SearchBar from '../components/ui/searchBar';
+import { auth } from '../firebase-config';
+import { onAuthStateChanged } from 'firebase/auth';
 
 const Home = () => {
+    
+    const [user, setUser] = useState()
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            // setLoading(false)
+            if (user) {
+            setUser(user)
+            document.querySelector(".App").classList += " logged__in"
+            }
+        })
+    }, []) 
+
     return (
         <div id="home">
             <img src="https://wallpaperaccess.com/full/752715.jpg" alt="" className="home__bg"/>
