@@ -10,7 +10,7 @@ import metacritic from '../assets/metacritic.png'
 
 const Details = () => {
 
-    const id = JSON.parse(localStorage.getItem('id'))
+    const id = localStorage.getItem('id')
     const type = localStorage.getItem('type')
     const [movieDetails, setMovieDetails] = useState()
     const [loading, setLoading] = useState(true)
@@ -31,14 +31,12 @@ const Details = () => {
         setLoading(true)
         const promise = await fetch(`https://www.omdbapi.com/?apikey=e9de4a78&i=${id}`)
         const data = await promise.json()
-        console.log(data)
         setMovieDetails(data)
         setLoading(false)
     }
 
     useEffect(() => {
         getMovieDetails()
-        console.log(type)
     }, [])
 
     let navigate = useNavigate()

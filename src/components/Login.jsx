@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { auth } from '../firebase-config';
 import { 
   signInWithEmailAndPassword, 
-  onAuthStateChanged
 } from 'firebase/auth';
 
 const Login = () => {
@@ -13,25 +12,16 @@ const Login = () => {
     const [loginPassword, setLoginPassword] = useState("")
 
     function login() {
-        document.querySelector(".App").classList += " logged__in"
         signInWithEmailAndPassword(auth, loginEmail, loginPassword)
         .then(({ user }) => {
+            document.querySelector(".App").classList += " logged__in"
             setUser(user)
             loginClose()
         })
-        .catch((error) => {
-            console.log(error)
+        .catch(() => {
+            alert('Wrong Email or Password')
         })
     }
-    
-    useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            // setLoading(false)
-            if (user) {
-            setUser(user)
-            }
-        })
-    }, []) 
 
     function loginClose() {
         document.querySelector(".App").classList.remove("login__open")
@@ -44,7 +34,7 @@ const Login = () => {
                 <h3 className="login__title">
                     Log In to Flix!
                 </h3>
-                <form className="login__form">
+                <form className="login__form" onKeyPress={(event) => event.key === 'Enter' && login()}>
                     <div className="form__item">
                         <label className="form__item--label">Email</label>
                         <input type="email" className="input" required onChange={(event) => setLoginEmail(event.target.value)}></input>

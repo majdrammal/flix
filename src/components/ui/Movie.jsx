@@ -8,14 +8,13 @@ const Movie = ({ img, title, year, id, type }) => {
     const [movieId, setMovieId] = useState();
 
     function storeId( passedId, passedType ) {
-        localStorage.removeItem('id')
-        localStorage.setItem('id', JSON.stringify(passedId));
-        localStorage.setItem('type', JSON.stringify(passedType));
+        localStorage.setItem('id', passedId);
+        localStorage.setItem('type', passedType);
         navigate(`/details`)
     }
 
     return (
-        <div className="movie" onClick={() => storeId(id)}>
+        <div className="movie" onClick={() => storeId(id, type)}>
             <img src={img} alt="" className="movie__img"/>
             <div className="movie__text">
                 <h2 className="movie__title">{title}</h2>

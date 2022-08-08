@@ -1,42 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { auth } from '../firebase-config';
+import { auth, db } from '../firebase-config';
+import { collection, addDoc, getDocs, getDoc, doc, query, where, updateDoc, deleteDoc } from 'firebase/firestore'
 import { 
   createUserWithEmailAndPassword, 
-  onAuthStateChanged
 } from 'firebase/auth';
 
 const Register = () => {
 
-    const [user, setUser] = useState()
     const [registerEmail, setRegisterEmail] = useState("")
     const [registerPassword, setRegisterPassword] = useState("")
-
+    const [user, setUser] = useState()
+    
     function register() {
         createUserWithEmailAndPassword(auth, registerEmail, registerPassword)
         .then((user) => {
-          console.log(user)
-          document.querySelector(".App").classList += " logged__in"
+            setUser(user)
+            registerClose()
         })
         .catch((error) => {
-          console.log(error)
+            console.log(error)
         })
-      }
-
-    useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            // setLoading(false)
-            if (user) {
-            setUser(user)
-            }
-        })
-    }, []) 
+    }
 
     function registerClose() {
         document.querySelector(".App").classList.remove("register__open")
+        document.querySelector(".App").classList += " username__overlay"
     }
-
-
 
     return (
         <div id="register">
@@ -45,16 +35,16 @@ const Register = () => {
                 <h3 className="register__title">
                     Register to Flix!
                 </h3>
-                <form className="register__form">
+                <form className="register__form" onKeyPress={(event) => event.key === 'Enter' && register()}>
                     <div className="form__item">
                         <label className="form__item--label">Email</label>
                         <input type="email" className="input" required onChange={(event) => setRegisterEmail(event.target.value)}></input>
                     </div>
                     <div className="form__item">
                         <label className="form__item--label">Password</label>
-                        <input type="password" className="input" required onChange={(event) => setRegisterPassword(event.target.value)}></input>
+                        <input type="password" title="Password must be at least 6 characters long" className="input" required onChange={(event) => setRegisterPassword(event.target.value)}></input>
                     </div>
-                    <button type='button' className="form__submit" onClick={register}>
+                    <button type='button' className="form__submit" onClick={() => register()}>
                         Register
                     </button>
                 </form>
