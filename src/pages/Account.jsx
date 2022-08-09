@@ -1,22 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { auth } from '../firebase-config';
-import { onAuthStateChanged } from 'firebase/auth';
+import { db } from '../firebase-config';
+import { collection, addDoc, getDocs, getDoc, doc, setDoc, query, where, updateDoc, deleteDoc } from 'firebase/firestore'
 import Nav from '../components/Nav';
 import Copyright from '../components/Copyright';
 import test from '../assets/rotten tomatoes.png'
+import LikedMovie from '../components/ui/LikedMovie';
 
-const Account = ({ userInfo }) => {
+const Account = ({ user, userInfo }) => {
 
-    const [user, setUser] = useState()
+    const [likedMovies, setLikedMovies] = useState()
+    const [loading, setLoading] = useState(true)
 
-    useEffect(() => {
-        onAuthStateChanged(auth, async (user) => {
-            // setLoading(false)
-            if (user) {
-            setUser(user)
-            }
-          })
-    }, []) 
+    async function getLikedMovies() {
+        const postCollectionRef = await query(
+          collection(db, "likes"),
+          where("uid", "==", user.uid)
+        )
+        const { docs } = await getDocs(postCollectionRef)
+        setLikedMovies(docs.map(doc => doc.data()))
+        setLoading(false)
+    }
+
+    getLikedMovies()
 
     return (
         <div id="account">
@@ -47,9 +52,15 @@ const Account = ({ userInfo }) => {
                             </div>
                         </div>
                         <div className="account__likes">
-                            <h2 className="account__likes--title">Likes</h2>
+                            <h2 className="account__likes--title">Likes <span className="smaller">({likedMovies.length})</span></h2>
                             <div className="account__likes--movies">
-                                Here
+                                {   !loading &&
+                                    likedMovies.slice(0,4).map(movie => {
+                                        return (
+                                            <LikedMovie id={movie.movieId} img={movie.poster} title={movie.title}/>
+                                        )
+                                    })
+                                }
                             </div>
                         </div>
                         <div className="account__friends">

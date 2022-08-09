@@ -47,6 +47,11 @@ button:hover {
   color: white;
 }
 
+.smaller {
+  font-size: 25px;
+  color: rgba(255, 255, 255, 0.449);
+}
+
 /*
 
   NAV 
@@ -890,6 +895,10 @@ nav {
   max-width: 350px;
 } 
 
+.account__likes {
+  padding: 20px 0 0 0;
+}
+
 .account__about--title, .account__likes--title, .account__friends--title {
   color: white;
   font-size: 35px;
@@ -900,8 +909,36 @@ nav {
   font-size: 20px;
 } 
 
-.account__likes--movies, .account__friends--added {
+.account__friends--added {
   color: white;
+}
+
+.account__likes--movies {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.liked__movie {
+  width: 40%;
+  margin-right: 30px;
+  height: 200px;
+}
+
+.liked__movie:nth-child(2n) {
+  margin-right: 0 !important;
+}
+
+.liked__movie--img {
+  width: 100%;
+  height: 70%;
+}
+
+.liked__movie--title {
+  color: white;
+  text-align: center;
+  font-size: 20px;
 }
 
 .account__lower--right {
