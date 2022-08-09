@@ -17,6 +17,7 @@ const Register = () => {
         .then((user) => {
             setUser(user)
             registerClose()
+            document.querySelector(".App").classList += " username__overlay"
         })
         .catch((error) => {
             console.log(error)
@@ -25,7 +26,6 @@ const Register = () => {
 
     function registerClose() {
         document.querySelector(".App").classList.remove("register__open")
-        document.querySelector(".App").classList += " username__overlay"
     }
 
     return (

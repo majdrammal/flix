@@ -209,8 +209,14 @@ nav {
   font-size: 18px;
   color: lightgray;
   z-index: 1;
-  cursor: not-allowed;
+  cursor: pointer;
   opacity: 0.7;
+  transition: all 300ms ease;
+}
+
+.home__main--login:hover, .home__main--create:hover {
+  opacity: 1;
+  transform: scale(1.05);
 }
 
 .home__main--login {
@@ -615,11 +621,11 @@ nav {
 
 /* 
 
-  REGISTER MODAL 
+  REGISTER MODAL & USER DETAILS
 
 */
 
-#register, #login {
+#register, #login, #user__details {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -641,7 +647,7 @@ nav {
   visibility: visible;
 }
 
-.register__container, .login__container {
+.register__container, .login__container, .user__details--container {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -654,23 +660,29 @@ nav {
   transform: scale(0);
 }
 
-.register__open .register__container, .login__open .login__container {
+.register__open .register__container, .login__open .login__container, .username__overlay .user__details--container {
   transform: scale(1);
 }
 
-.register__open nav, .login__open nav,
-.register__open .browse__search, .login__open .browse__search,
-.register__open .movies__section, .login__open .movies__section,
-.register__open .back, .login__open .back,
-.register__open .movie__details, .login__open .movie__details {
+.username__overlay #user__details {
+  z-index: 60;
+  box-shadow: 0 20px 80px 0 rgb(0, 0, 0, 0.55);
+  visibility: visible;
+}
+
+.register__open nav, .login__open nav, .username__overlay nav,
+.register__open .browse__search, .login__open .browse__search, .username__overlay .browse__search,
+.register__open .movies__section, .login__open .movies__section, .username__overlay .movies__section,
+.register__open .back, .login__open .back, .username__overlay .back,
+.register__open .movie__details, .login__open .movie__details, .username__overlay .movie__details {
   opacity: 0;
 }
 
-.register__open .home__bg, .login__open .home__bg {
+.register__open .home__bg, .login__open .home__bg, .username__overlay .home__bg {
   filter: brightness(0);
 }
 
-.register__form, .login__form {
+.register__form, .login__form, .user__details--form {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -679,7 +691,7 @@ nav {
   z-index: 1;
 }
 
-.register__title, .login__title {
+.register__title, .login__title, .user__details--title {
   font-size: 55px;
   text-align: center;
   margin-bottom: 32px;
@@ -805,47 +817,106 @@ nav {
 
 /* 
 
-  USER DETAILS
+  ACCOUNT PAGE
 
 */
 
-
-
-.user__details {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%;
-  max-width: 1100px;
-  height: 700px;
-  border-radius: 20px;
-  overflow: hidden;
-  display: flex;
-  visibility: hidden;
-  z-index: -1; 
-  transition: visibility 1s, z-index 1s, box-shadow 0.5s ease;
+#account {
+  background-color: #242424;
+  min-height: 100vh;
 }
 
-.user__details--container {
+.account__container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.account__upper {
+  display: flex;
+  align-items: center;
+}
+
+.account__img--wrapper {
+  width: 150px;
+  height: 150px;
+  border: 1px solid rgba(255, 255, 255, 0.092);
+  border-radius: 50%;
+  margin-right: 40px;
+}
+
+.account__img {
+  height: 100%;
   width: 100%;
+}
+
+.account__name {
+  color: white;
+  font-size: 54px;
+  line-height: 4rem;
+}
+
+.account__status {
+  color: rgba(255, 255, 255, 0.493);
+  font-size: 22px;
+}
+
+.account__hr--upper, .account__hr--lower {
+  background-color: rgba(255, 255, 255, 0.168);
+  border: 0.5px solid rgba(255, 255, 255, 0.161);
+  width: 100%;
+  margin: 40px 0;
+}
+
+.account__hr--lower {
+  background-color: rgba(255, 255, 255, 0.072);
+  border: 0.25px solid rgba(255, 255, 255, 0.062);
+}
+
+.account__lower {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 40px;
+}
+
+.account__lower--left {
   display: flex;
   flex-direction: column;
-  padding: 40px 72px;
-  justify-content: center;
-  position: relative;
-  transition: all 300ms ease-in;
-  background-image: url("https://wallpaperaccess.com/full/752715.jpg");
+  width: 40%;
+}
+
+.account__about, .account__likes, .account__friends {
+  padding: 20px 0;
+  max-width: 350px;
+} 
+
+.account__about--title, .account__likes--title, .account__friends--title {
   color: white;
-  transform: scale(0);
+  font-size: 35px;
 }
 
-.username__overlay .user__details {
-  visibility: visible;
-  z-index: 1;
+.account__about--para {
+  color: rgba(255, 255, 255, 0.421);
+  font-size: 20px;
+} 
+
+.account__likes--movies, .account__friends--added {
+  color: white;
 }
 
-.username__overlay .user__details--container {
-  transform: scale(1);
+.account__lower--right {
+  width: 60%;
 }
+
+.account__comments--title {
+  color: white;
+  font-size: 35px;
+}
+
+.comment {
+  color: white;
+}
+
+
+
 

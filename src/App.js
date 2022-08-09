@@ -15,31 +15,41 @@ import UserDetails from './components/UserDetails';
 function App() {
 
   const [user, setUser] = useState()
+  const [userInfo, setUserInfo] = useState()
 
   useEffect(() => {
       onAuthStateChanged(auth, async (user) => {
           // setLoading(false)
           if (user) {
-          setUser(user)      
+          setUser(user) 
+          const currentState = await getUserById(user.uid)
           setDoc(doc(db, 'users', user.uid), {
+              ... currentState,
               email: user.email,
             })
           }
         })
   }, []) 
 
+  async function getUserById(id) {
+    const userRef = doc(db, "users", id)
+    const userSnap = await getDoc(userRef)
+    setUserInfo(userSnap.data())
+    return userSnap.data()
+  }
+
   return (
     <Router>
       <div className="App">
         <Routes>
-            <Route path='/' element={<Home />} />
+            <Route path='/' element={<Home user={user}/>} />
             <Route path=':title' element={<Browse />} />
-            <Route path='/details' element={<Details />} />
-            <Route path='/account' element={<Account />} />
+            <Route path='/details' element={<Details user={user} />} />
+            <Route path='/account' element={<Account userInfo={userInfo}/>} />
         </Routes>
         <Register />
         <Login />
-        <UserDetails />
+        <UserDetails/>
       </div>
     </Router>
   );

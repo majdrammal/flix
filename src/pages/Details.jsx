@@ -7,8 +7,10 @@ import MovieInfo from '../components/ui/MovieInfo';
 import rottenTomatoes from '../assets/rotten tomatoes.png'
 import imdb from '../assets/imdb.png'
 import metacritic from '../assets/metacritic.png'
+import { auth, db } from '../firebase-config';
+import { collection, addDoc, getDocs, getDoc, doc, setDoc, query, where, updateDoc, deleteDoc } from 'firebase/firestore'
 
-const Details = () => {
+const Details = ({ user }) => {
 
     const id = localStorage.getItem('id')
     const type = localStorage.getItem('type')
@@ -19,10 +21,19 @@ const Details = () => {
     function liked() {
         if (!isLiked) {
             document.querySelector(".movie__details").classList += ' like__button--clicked'
+            setDoc(doc(db, 'likes', id + user.uid), {
+                uid: user.uid,
+                title: movieDetails.Title,
+                movieId: id,
+                type: type,
+                poster: movieDetails.Poster
+            })
             isLiked = true
         } 
         else {
             document.querySelector(".movie__details").classList.remove('like__button--clicked')
+            const likeRef = doc(db, "likes", id + user.uid)
+            deleteDoc(likeRef)
             isLiked = false
         }
     }
@@ -37,9 +48,22 @@ const Details = () => {
 
     useEffect(() => {
         getMovieDetails()
+        checkIfMovieIsLiked()
     }, [])
 
     let navigate = useNavigate()
+
+    async function checkIfMovieIsLiked() {
+        const likesCollectionRef = await query(
+          collection(db, "likes"),
+          where("uid", "==", user.uid)
+        )
+        const { docs } = await getDocs(likesCollectionRef)
+        let likedMovies = docs.map(doc => doc.data()).filter(movie => movie.movieId == id)
+        console.log(likedMovies)
+        likedMovies.length !== 0 && ( document.querySelector(".movie__details").classList += ' like__button--clicked')
+        likedMovies.length !== 0 ? isLiked = true : isLiked = false
+      }
 
     return (
         <div id="details">

@@ -33,11 +33,21 @@ const UserDetails = () => {
       }
 
     return (
-        <div className="user__details">
+        <div id="user__details">
             <div className="user__details--container">
-            What should we call you?
-            <input type="name" onChange={(event) => setUsername(event.target.value)}/>
-            <button onClick={addUsername}>Submit</button>
+                <h3 className="user__details--title">
+                    What Should We Call You?
+                </h3>
+                <form className="user__details--form" onKeyPress={(event) => event.key === 'Enter' && addUsername()}>
+                    <div className="form__item">
+                        <label className="form__item--label">Nickname</label>
+                        <input type="name"  className="input" required onChange={(event) => setUsername(event.target.value)}/>
+                    </div>
+                    <button type='button' className="form__submit" onClick={() => addUsername()}>
+                        Submit
+                    </button>
+                </form>
+                <div className="dark__cover"></div>
             </div>
         </div>
     );
