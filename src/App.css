@@ -933,6 +933,13 @@ nav {
 .liked__movie--img {
   width: 100%;
   height: 70%;
+  transition: all 300ms ease;
+  cursor: pointer;
+}
+
+.liked__movie--img:hover {
+  opacity: 0.8;
+  transform: scale(0.95);
 }
 
 .liked__movie--title {

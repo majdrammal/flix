@@ -12,16 +12,18 @@ const Account = ({ user, userInfo }) => {
     const [loading, setLoading] = useState(true)
 
     async function getLikedMovies() {
-        const postCollectionRef = await query(
+        const likeCollectionRef = await query(
           collection(db, "likes"),
           where("uid", "==", user.uid)
         )
-        const { docs } = await getDocs(postCollectionRef)
+        const { docs } = await getDocs(likeCollectionRef)
         setLikedMovies(docs.map(doc => doc.data()))
         setLoading(false)
     }
 
-    getLikedMovies()
+    setTimeout(() => {
+        getLikedMovies()
+    }, 100)
 
     return (
         <div id="account">
@@ -52,7 +54,14 @@ const Account = ({ user, userInfo }) => {
                             </div>
                         </div>
                         <div className="account__likes">
-                            <h2 className="account__likes--title">Likes <span className="smaller">({likedMovies.length})</span></h2>
+                            { loading ? 
+                            (
+                            <h2 className="account__likes--title">Likes <span className="smaller">(0)</span></h2>
+                            )
+                            :
+                            (
+                                <h2 className="account__likes--title">Likes <span className="smaller">({likedMovies.length})</span></h2>
+                            )}
                             <div className="account__likes--movies">
                                 {   !loading &&
                                     likedMovies.slice(0,4).map(movie => {
