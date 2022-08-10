@@ -424,6 +424,20 @@ nav {
   min-height: 100vh;
 }
 
+.set__profile-pic {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  transition: all 300ms ease;
+  cursor: pointer;
+  font-size: 20px;
+  color: rgba(145, 145, 145, 0.188);
+}
+
+.set__profile-pic:hover { 
+  color: rgb(148, 148, 148);
+}
+
 .details__container {
   width: 90%;
   margin: 0 auto;
@@ -829,18 +843,69 @@ nav {
 #account {
   background-color: #242424;
   min-height: 100vh;
+  position: relative;
 }
 
 .account__container {
   width: 80%;
   margin: 0 auto;
-  padding: 40px 0;
+  padding: 20px 0;
 }
 
 .account__upper {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  background-color: #36363669;
+  padding: 20px 40px;
+  border-radius: 20px;
+  border: 1px solid rgba(128, 128, 128, 0.072);
 }
+
+.account__upper--left, .account__upper--right {
+  display: flex;
+  align-items: center;
+}
+
+.account__upper--right {
+  flex-direction: column;
+  justify-content: center;
+}
+
+.search__friends {
+  color: white;
+  font-size: 25px;
+}
+
+.search__friends--input {
+  width: 200px;
+  height: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.236);
+  padding: 5px 10px;
+  font-size: 17.5px;
+}
+
+.search__friends--input:focus {
+  border: 1px solid rgba(255, 255, 255, 0.565);
+}
+
+.your__id {
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+/* .following, .followers {
+  text-align: center;
+} */
+
+/* .followers {
+  margin-right: 40px;
+}
+
+.followers__title, .following__title {
+  font-size: 25px;
+  color: white;
+} */
 
 .account__img--wrapper {
   width: 150px;
@@ -853,6 +918,7 @@ nav {
 .account__img {
   height: 100%;
   width: 100%;
+  border-radius: 50%;
 }
 
 .account__name {
@@ -866,40 +932,23 @@ nav {
   font-size: 22px;
 }
 
-.account__hr--upper, .account__hr--lower {
-  background-color: rgba(255, 255, 255, 0.168);
-  border: 0.5px solid rgba(255, 255, 255, 0.161);
-  width: 100%;
-  margin: 40px 0;
-}
-
-.account__hr--lower {
-  background-color: rgba(255, 255, 255, 0.072);
-  border: 0.25px solid rgba(255, 255, 255, 0.062);
-}
-
 .account__lower {
+  margin: 10px 0;
   display: flex;
-  justify-content: space-between;
-  padding-bottom: 40px;
+  align-items: center;
+  width: 100%;
 }
-
-.account__lower--left {
-  display: flex;
-  flex-direction: column;
-  width: 40%;
-}
-
-.account__about, .account__likes, .account__friends {
-  padding: 20px 0;
-  max-width: 350px;
-} 
 
 .account__likes {
-  padding: 20px 0 0 0;
-}
+  background-color: #49494969;
+  padding: 10px 40px 20px 40px;
+  border-radius: 20px;
+  border: 1px solid rgba(128, 128, 128, 0.072);
+  margin-bottom: 40px;
+  width: 100%;
+} 
 
-.account__about--title, .account__likes--title, .account__friends--title {
+.account__about--title, .account__likes--title {
   color: white;
   font-size: 35px;
 }
@@ -909,10 +958,6 @@ nav {
   font-size: 20px;
 } 
 
-.account__friends--added {
-  color: white;
-}
-
 .account__likes--movies {
   width: 100%;
   display: flex;
@@ -921,31 +966,54 @@ nav {
 }
 
 .liked__movie {
-  width: 40%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 140px;
   margin-right: 30px;
-  height: 200px;
+  height: 185px;
+  border-radius: 20px;
+  margin-top: 20px;
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+  transition: all 300ms ease;
 }
 
-.liked__movie:nth-child(2n) {
+.liked__movie:last-child {
   margin-right: 0 !important;
 }
 
-.liked__movie--img {
-  width: 100%;
-  height: 70%;
-  transition: all 300ms ease;
-  cursor: pointer;
+.liked__movie:hover {
+  box-shadow: none;
 }
 
-.liked__movie--img:hover {
-  opacity: 0.8;
+.liked__movie--img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: all 300ms ease;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.liked__movie:hover .liked__movie--img {
+  opacity: 0.15;
   transform: scale(0.95);
 }
 
 .liked__movie--title {
   color: white;
+  z-index: 1;
+  opacity: 0;
   text-align: center;
-  font-size: 20px;
+  font-size: 25px;
+  transition: all 300ms ease;
+  cursor: pointer;
+  max-width: 60%;
+}
+
+.liked__movie:hover .liked__movie--title {
+  opacity: 1;
 }
 
 .account__lower--right {

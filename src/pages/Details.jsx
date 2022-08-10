@@ -48,8 +48,9 @@ const Details = ({ user }) => {
 
     useEffect(() => {
         getMovieDetails()
-        checkIfMovieIsLiked()
     }, [])
+
+    !loading && checkIfMovieIsLiked()
 
     let navigate = useNavigate()
 
@@ -63,6 +64,20 @@ const Details = ({ user }) => {
         console.log(likedMovies)
         likedMovies.length !== 0 && ( document.querySelector(".movie__details").classList += ' like__button--clicked')
         likedMovies.length !== 0 ? isLiked = true : isLiked = false
+      }
+
+    async function profilePic() {
+        const currentState = await getUserById(user.uid)
+        setDoc(doc(db, 'users', user.uid), {
+            ... currentState,
+            image: movieDetails.Poster
+          })
+    }
+
+    async function getUserById(id) {
+        const picRef = doc(db, "users", id)
+        const picSnap = await getDoc(picRef)
+        return picSnap.data()
       }
 
     return (
@@ -95,6 +110,7 @@ const Details = ({ user }) => {
                      )     
                     }
                     <FontAwesomeIcon icon="fa-solid fa-heart" className="like__button" onClick={liked}/>
+                    <p className="set__profile-pic" onClick={profilePic}>Set As Account Avatar</p>
                 </div>
             </div>
             <Copyright />

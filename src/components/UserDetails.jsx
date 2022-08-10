@@ -15,7 +15,7 @@ const UserDetails = () => {
             setUser(user)      
             }
           })
-    }, []) 
+    }, [user]) 
 
     async function addUsername() {
         const currentState = await getUserById()

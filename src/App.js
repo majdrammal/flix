@@ -11,6 +11,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { collection, addDoc, getDocs, getDoc, doc, setDoc, query, where, updateDoc, deleteDoc } from 'firebase/firestore'
 import Account from './pages/Account';
 import UserDetails from './components/UserDetails';
+import OtherAccount from './pages/otherAccount';
 
 function App() {
 
@@ -29,7 +30,7 @@ function App() {
             })
           }
         })
-  }, []) 
+  }, [user]) 
 
   async function getUserById(id) {
     const userRef = doc(db, "users", id)
@@ -45,7 +46,8 @@ function App() {
             <Route path='/' element={<Home user={user}/>} />
             <Route path=':title' element={<Browse />} />
             <Route path='/details' element={<Details user={user} />} />
-            <Route path='/account' element={<Account user={user} userInfo={userInfo}/>} />
+            <Route path='/myaccount' element={<Account user={user} userInfo={userInfo}/>} />
+            <Route path='/user' element={<OtherAccount />} />
         </Routes>
         <Register />
         <Login />
