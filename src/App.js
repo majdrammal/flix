@@ -47,7 +47,7 @@ function App() {
             <Route path=':title' element={<Browse />} />
             <Route path='/details' element={<Details user={user} />} />
             <Route path='/myaccount' element={<Account user={user} userInfo={userInfo}/>} />
-            <Route path='/user' element={<OtherAccount />} />
+            <Route path='/user' element={<OtherAccount user={user} />} />
         </Routes>
         <Register />
         <Login />

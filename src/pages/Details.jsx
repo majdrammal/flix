@@ -48,9 +48,8 @@ const Details = ({ user }) => {
 
     useEffect(() => {
         getMovieDetails()
-    }, [])
-
-    !loading && checkIfMovieIsLiked()
+        checkIfMovieIsLiked()
+    }, [user])
 
     let navigate = useNavigate()
 
@@ -61,7 +60,6 @@ const Details = ({ user }) => {
         )
         const { docs } = await getDocs(likesCollectionRef)
         let likedMovies = docs.map(doc => doc.data()).filter(movie => movie.movieId == id)
-        console.log(likedMovies)
         likedMovies.length !== 0 && ( document.querySelector(".movie__details").classList += ' like__button--clicked')
         likedMovies.length !== 0 ? isLiked = true : isLiked = false
       }
@@ -109,8 +107,17 @@ const Details = ({ user }) => {
                      </>  
                      )     
                     }
-                    <FontAwesomeIcon icon="fa-solid fa-heart" className="like__button" onClick={liked}/>
-                    <p className="set__profile-pic" onClick={profilePic}>Set As Account Avatar</p>
+                    {
+                        user ? (
+                            <>
+                            <FontAwesomeIcon icon="fa-solid fa-heart" className="like__button" onClick={liked}/>
+                            <p className="set__profile-pic" onClick={profilePic}>Set As Account Avatar</p>
+                            </>
+                            ) : (
+                                <>
+                                </> 
+                            )
+                    }
                 </div>
             </div>
             <Copyright />

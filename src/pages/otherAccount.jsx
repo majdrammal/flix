@@ -6,7 +6,7 @@ import Copyright from '../components/Copyright';
 import Nav from '../components/Nav';
 import LikedMovie from '../components/ui/LikedMovie';
 
-const OtherAccount = () => {
+const OtherAccount = ({ user }) => {
 
     // const { id } = useParams()
     const id = localStorage.getItem('friendId')
@@ -31,7 +31,7 @@ const OtherAccount = () => {
     useEffect(() => {
         console.log(id)
         getUserById()
-    }, [])
+    }, [user])
 
     return (
         <div id="account">

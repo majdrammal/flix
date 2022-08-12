@@ -24,6 +24,7 @@ const Account = ({ user, userInfo }) => {
         const { docs } = await getDocs(likeCollectionRef)
         setLikedMovies(docs.map(doc => doc.data()))
         setLoading(false)
+        // console.log(docs[0]._key.path.segments[6])
     }
 
     useEffect(() => {

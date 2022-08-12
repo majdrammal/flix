@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Nav from '../components/Nav';
 import Copyright from '../components/Copyright';
 import SearchBar from '../components/ui/searchBar';
@@ -12,6 +12,10 @@ const Home = ({ user }) => {
     function loginOpen() {
         document.querySelector(".App").classList += " login__open"
     }
+
+    useEffect(() => {
+        document.querySelector("nav").style.background = "#242424"
+    }, [])
 
     return (
         <div id="home">
@@ -33,9 +37,10 @@ const Home = ({ user }) => {
                     }
                 </div>
             </div>
-            <Copyright />
+            <Copyright /> 
         </div>
     );
 }
 
 export default Home;
+
