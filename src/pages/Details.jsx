@@ -54,6 +54,7 @@ const Details = ({ user }) => {
     let navigate = useNavigate()
 
     async function checkIfMovieIsLiked() {
+        if (user) { 
         const likesCollectionRef = await query(
           collection(db, "likes"),
           where("uid", "==", user.uid)
@@ -62,6 +63,7 @@ const Details = ({ user }) => {
         let likedMovies = docs.map(doc => doc.data()).filter(movie => movie.movieId == id)
         likedMovies.length !== 0 && ( document.querySelector(".movie__details").classList += ' like__button--clicked')
         likedMovies.length !== 0 ? isLiked = true : isLiked = false
+        }
       }
 
     async function profilePic() {

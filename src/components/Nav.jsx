@@ -51,7 +51,7 @@ const Nav = () => {
                     {!user && <button className="login__btn" onClick={loginOpen}>Log In</button>}
                     {!user && <button className="signup__btn" onClick={registerOpen}>Sign Up</button>}
                     {user && <button className="profile__btn" onClick={() => navigate(`/myaccount`)}>Account</button>}
-                    {user && <button className="logout__btn" onClick={logout}>Logout</button>}
+                    {user && <a href="/" className="logout__btn" onClick={logout}>Logout</a>}
                 </div>
             </div>
         </nav>
