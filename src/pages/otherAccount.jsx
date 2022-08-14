@@ -8,6 +8,8 @@ import LikedMovie from '../components/ui/LikedMovie';
 
 const OtherAccount = ({ user }) => {
 
+    
+
     const { username } = useParams()
 
     const [userImg, setUserImg] = useState()
@@ -37,7 +39,7 @@ const OtherAccount = ({ user }) => {
     }
 
     useEffect(() => {
-        // getUserByUsername()
+        getUserByUsername()
     }, [username])
 
     return (
