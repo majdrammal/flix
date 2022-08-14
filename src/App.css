@@ -380,9 +380,13 @@ nav {
   transform: scale(0.95);
 }
 
+.movie:hover .movie__title, .movie:hover .movie__type {
+  opacity: 0;
+}
+
 .movie__img {
   width: 100%;
-  height: 320px;
+  height: 320px; 
   opacity: 0.8;
 }
 
@@ -391,7 +395,7 @@ nav {
   flex-direction: column;
   justify-content: center;
   margin: 10px 0;
-  width: 100%;
+  width: 100%; 
 }
 
 .movie__title {
@@ -402,6 +406,7 @@ nav {
   white-space: nowrap;
   overflow: hidden;
   text-align: center;
+  transition: all 400ms ease;
 }
 
 .movie__type {
@@ -410,10 +415,11 @@ nav {
   color: white;
   margin: 0 10px;
   text-align: center;
+  transition: all 400ms ease;
 }
 
 .movie__more {
-  background-color: rgb(212, 86, 86);
+  background-color: rgba(0, 0, 0, 0.45); /* rgba(0, 0, 0, 0.45) */
   position: absolute;
   bottom: 0;
   left: 0;
@@ -560,10 +566,10 @@ nav {
   justify-content: center;
 }
 
-.movie__details--no-img {
+/* .movie__details--no-img {
   height: 100%;
   width: 60%;
-}
+} */
 
 .movie__details--right {
   width: 60%;
@@ -949,11 +955,6 @@ nav {
 
 .search__friends--input:focus {
   border: 1px solid rgba(255, 255, 255, 0.565);
-}
-
-.your__id {
-  margin-top: 10px;
-  font-size: 20px;
 }
 
 .account__img--wrapper {

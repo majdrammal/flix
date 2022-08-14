@@ -14,7 +14,7 @@ const Account = ({ user, userInfo }) => {
     const [likedMovies, setLikedMovies] = useState()
     const [loading, setLoading] = useState(true)
     const [profilePic, setProfilePic] = useState("https://www.portmelbournefc.com.au/wp-content/uploads/2022/03/avatar-1.jpeg")
-    const [friendId, setFriendId] = useState()
+    const [otherUsername, setOtherUsername] = useState()
 
     async function getLikedMovies() {
         const likeCollectionRef = await query(
@@ -52,13 +52,9 @@ const Account = ({ user, userInfo }) => {
                             <p className="account__status">Online</p>
                         </div>
                     </div>
-                    <div className="account__upper--right" onKeyPress={(event) => event.key === 'Enter' && navigate(`/user`)}>
-                        <h3 className="search__friends">Search User By Id:</h3>
-                        <input type="text" className="input search__friends--input" onChange={(event) => localStorage.setItem('friendId', event.target.value)}/>
-                        {
-                            !loading &&
-                            <span className="smaller your__id">Your Id: {user.uid}</span>
-                        }
+                    <div className="account__upper--right" onKeyPress={(event) => event.key === 'Enter' && navigate(`/user/${otherUsername}`)}>
+                        <h3 className="search__friends">Search for users:</h3>
+                        <input type="text" className="input search__friends--input" onChange={(event) => setOtherUsername(event.target.value)}/>
                     </div>
                 </div>
                 <div className="account__lower">

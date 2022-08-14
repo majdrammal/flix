@@ -8,30 +8,37 @@ import LikedMovie from '../components/ui/LikedMovie';
 
 const OtherAccount = ({ user }) => {
 
-    // const { id } = useParams()
-    const id = localStorage.getItem('friendId')
+    const { username } = useParams()
 
-    const [userInfo, setUserInfo] = useState()
+    const [userImg, setUserImg] = useState()
     const [loading, setLoading] = useState(true)
     const [likedMovies, setLikedMovies] = useState()
+    const [id, setId] = useState()
 
-    async function getUserById() {
-        const userRef = doc(db, "users", id)
-        const userSnap = await getDoc(userRef)
-        setUserInfo(userSnap.data())
+    async function getUserByUsername() {
+        const userRef = await query(
+            collection(db, "users"),
+            where("username", "==", username)
+        )
+        const { docs } = await getDocs(userRef)
+        setUserImg(docs[0]._document.data.value.mapValue.fields.image.stringValue)
+        setId(docs[0]._key.path.segments[6])
+        getLikes(docs[0]._key.path.segments[6])
+    }
+
+    async function getLikes(id) {
         const likeCollectionRef = await query(
             collection(db, "likes"),
             where("uid", "==", id)
         )
-        const { docs } = await getDocs(likeCollectionRef)
+        const { docs}  = await getDocs(likeCollectionRef)
         setLikedMovies(docs.map(doc => doc.data()))
         setLoading(false)
     }
 
     useEffect(() => {
-        console.log(id)
-        getUserById()
-    }, [user])
+        // getUserByUsername()
+    }, [username])
 
     return (
         <div id="account">
@@ -42,16 +49,15 @@ const OtherAccount = ({ user }) => {
                         <div className="account__img--wrapper">
                             {
                                 !loading &&
-                                <img src={userInfo.image} alt="" className="account__img"/>
+                                <img src={userImg} alt="" className="account__img"/>
                             }
                         </div>
                         <div className="account__details">
-                            {
-                                userInfo && 
-                                <h1 className="account__name">{userInfo.username}</h1>
-                            }
-                            {/* <p className="account__status">{userInfo.lastSeen}</p> */}
+                                <h1 className="account__name">{username}</h1>
                         </div>
+                    </div>
+                    <div className="account__upper--right">
+                        <button className="follow__button">Follow</button>
                     </div>
                 </div>
                 <div className="account__lower">
