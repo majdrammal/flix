@@ -27,6 +27,7 @@ function App() {
           setDoc(doc(db, 'users', user.uid), {
               ... currentState,
               email: user.email,
+              lastOnline: new Date().toLocaleString().split(',')[0]
             })
           }
         })
@@ -43,11 +44,11 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-            <Route path='/' element={<Home user={user}/>} />
+            <Route path='/' element={<Home user={user} />} />
             <Route path=':title' element={<Browse />} />
             <Route path='/details' element={<Details user={user} />} />
-            <Route path='/myaccount' element={<Account user={user} userInfo={userInfo}/>} />
-            <Route path='/user/:username' element={<OtherAccount user={user} />} />
+            <Route path='/myaccount' element={<Account user={user} userInfo={userInfo} />} />
+            <Route path='/user/:username' element={<OtherAccount user={user} mainUserInfo={userInfo} />} />
         </Routes>
         <Register />
         <Login />

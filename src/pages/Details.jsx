@@ -7,8 +7,8 @@ import MovieInfo from '../components/ui/MovieInfo';
 import rottenTomatoes from '../assets/rotten tomatoes.png'
 import imdb from '../assets/imdb.png'
 import metacritic from '../assets/metacritic.png'
-import { auth, db } from '../firebase-config';
-import { collection, addDoc, getDocs, getDoc, doc, setDoc, query, where, updateDoc, deleteDoc } from 'firebase/firestore'
+import { db } from '../firebase-config';
+import { collection, getDocs, getDoc, doc, setDoc, query, where, deleteDoc } from 'firebase/firestore'
 
 const Details = ({ user }) => {
 
@@ -60,7 +60,7 @@ const Details = ({ user }) => {
           where("uid", "==", user.uid)
         )
         const { docs } = await getDocs(likesCollectionRef)
-        let likedMovies = docs.map(doc => doc.data()).filter(movie => movie.movieId == id)
+        let likedMovies = docs.map(doc => doc.data()).filter(like => like.movieId == id)
         likedMovies.length !== 0 && ( document.querySelector(".movie__details").classList += ' like__button--clicked')
         likedMovies.length !== 0 ? isLiked = true : isLiked = false
         }

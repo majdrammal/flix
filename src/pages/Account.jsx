@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../firebase-config';
-import { collection, addDoc, getDocs, getDoc, doc, setDoc, query, where, updateDoc, deleteDoc } from 'firebase/firestore'
+import { collection, getDocs, query, where, deleteDoc } from 'firebase/firestore'
 import Nav from '../components/Nav';
 import Copyright from '../components/Copyright';
 import LikedMovie from '../components/ui/LikedMovie';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Following from '../components/ui/Following';
 
 const Account = ({ user, userInfo }) => {
 
     let navigate = useNavigate()
 
-
     const [likedMovies, setLikedMovies] = useState()
     const [loading, setLoading] = useState(true)
-    const [profilePic, setProfilePic] = useState("https://www.portmelbournefc.com.au/wp-content/uploads/2022/03/avatar-1.jpeg")
     const [otherUsername, setOtherUsername] = useState()
+    const [following, setFollowing] = useState('0')
 
     async function getLikedMovies() {
         const likeCollectionRef = await query(
@@ -23,8 +24,19 @@ const Account = ({ user, userInfo }) => {
         )
         const { docs } = await getDocs(likeCollectionRef)
         setLikedMovies(docs.map(doc => doc.data()))
-        setLoading(false)
-        // console.log(docs[0]._key.path.segments[6])
+        getFollowing()
+    }
+
+    async function getFollowing() {
+        if (user) { 
+            const friendsCollectionRef = await query(
+              collection(db, "friends"),
+              where("followerUid", "==", user.uid)
+            )
+            const { docs } = await getDocs(friendsCollectionRef)
+            setFollowing(docs.map(doc => doc.data()))
+            setLoading(false)
+        }
     }
 
     useEffect(() => {
@@ -39,8 +51,7 @@ const Account = ({ user, userInfo }) => {
                     <div className="account__upper--left">
                         <div className="account__img--wrapper">
                             {
-                            !loading &&
-                            <img src={userInfo.image} alt="" className="account__img"/>
+                            !loading && <img src={userInfo.image} alt="" className="account__img"/>
                             }
                         </div>
                         <div className="account__details">
@@ -54,7 +65,21 @@ const Account = ({ user, userInfo }) => {
                     </div>
                     <div className="account__upper--right" onKeyPress={(event) => event.key === 'Enter' && navigate(`/user/${otherUsername}`)}>
                         <h3 className="search__friends">Search for users:</h3>
-                        <input type="text" className="input search__friends--input" onChange={(event) => setOtherUsername(event.target.value)}/>
+                        <input type="text" placeholder="Search by username..." className="input search__friends--input" onChange={(event) => setOtherUsername(event.target.value)}/>
+                        <div className="account__following">
+                            <span className="smaller account__following--title" onClick={() => following.length !== 0 && (document.querySelector(".account__following").classList += " following__open")}>Following: {following.length}</span>
+                            <div className="following__users">
+                                {
+                                    !loading &&
+                                    following.map(user => {
+                                        return (
+                                            <Following user={user} />
+                                        )
+                                    })
+                                }
+                                <FontAwesomeIcon icon="fa-solid fa-x" className="following__closer" onClick={() => document.querySelector(".account__following").classList.remove("following__open")}/>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className="account__lower">

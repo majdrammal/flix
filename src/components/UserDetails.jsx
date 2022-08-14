@@ -21,12 +21,13 @@ const UserDetails = () => {
         const currentState = await getUserById()
         setDoc(doc(db, 'users', user.uid), {
             ... currentState,
-            username: username
+            username: username,
+            image: "https://www.portmelbournefc.com.au/wp-content/uploads/2022/03/avatar-1.jpeg"
           })
           document.querySelector(".App").classList.remove("username__overlay")
     }
 
-    async function getUserById(id) {
+    async function getUserById() {
         const userRef = doc(db, "users", user.uid)
         const userSnap = await getDoc(userRef)
         return userSnap.data()
