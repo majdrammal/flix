@@ -358,6 +358,7 @@ nav {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  padding-bottom: 60px;
 }
 
 .movie {
@@ -372,10 +373,6 @@ nav {
   flex-direction: column;
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
-}
-
-.movie:nth-child(n + 5) {
-  margin-bottom: 100px;
 }
 
 .movie:hover {
@@ -963,8 +960,16 @@ nav {
   border: 1px solid rgba(255, 255, 255, 0.565);
 }
 
+.follow__button {
+  margin-bottom: 10px;
+}
+
 .account__following {
   align-self: flex-start;
+}
+
+.account__following--other {
+  align-self: center;
 }
 
 .account__following--title {
@@ -981,13 +986,17 @@ nav {
   position: absolute;
   top: 110px;
   left: 0;
-  width: 100%;
+  min-width: 100%;
   background-color: #242424;
   border: 1px solid rgba(166, 166, 166, 0.072);
   padding: 10px;
   padding-bottom: 0px;
   display: none;
   z-index: 5;
+}
+
+.following__users--other {
+  top: 90px;
 }
 
 .following__user {
@@ -997,6 +1006,7 @@ nav {
 }
 
 .following__user--img {
+  min-width: 50px;
   width: 50px;
   height: 50px;
   margin-right: 10px;

@@ -5,6 +5,8 @@ import { query, collection, getDocs, where, setDoc, doc, deleteDoc } from 'fireb
 import Copyright from '../components/Copyright';
 import Nav from '../components/Nav';
 import LikedMovie from '../components/ui/LikedMovie';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Following from '../components/ui/Following';
 
 const OtherAccount = ({ user, mainUserInfo }) => {
 
@@ -14,6 +16,7 @@ const OtherAccount = ({ user, mainUserInfo }) => {
     const [loading, setLoading] = useState(true)
     const [likedMovies, setLikedMovies] = useState()
     const [id, setId] = useState()
+    const [following, setFollowing] = useState([])
 
     async function getUserByUsername() {
         const userRef = await query(
@@ -33,7 +36,7 @@ const OtherAccount = ({ user, mainUserInfo }) => {
         )
         const { docs}  = await getDocs(likeCollectionRef)
         setLikedMovies(docs.map(doc => doc.data()))
-        setLoading(false)
+        getFollowing()
     }
 
     let isFollowed = false
@@ -72,12 +75,29 @@ const OtherAccount = ({ user, mainUserInfo }) => {
         followed.length !== 0 && ( document.querySelector(".follow__button").innerHTML = "Unfollow")
         followed.length !== 0 ? isFollowed = true : isFollowed = false
         }
-      }
+    }
+
+    async function getFollowing() {
+        if (user) { 
+            const friendsCollectionRef = await query(
+              collection(db, "friends"),
+              where("followerUid", "==", id)
+            )
+            const { docs } = await getDocs(friendsCollectionRef)
+            setFollowing(docs.map(doc => doc.data()))
+            setLoading(false)
+        }
+    }
 
     useEffect(() => {
         getUserByUsername()
         checkIfUserIsFollowed()
     }, [id])
+
+    useEffect(() => {
+        getUserByUsername()
+        checkIfUserIsFollowed()
+    }, [username])
 
     return (
         <div id="account">
@@ -100,6 +120,20 @@ const OtherAccount = ({ user, mainUserInfo }) => {
                     </div>
                     <div className="account__upper--right">
                         <button className="follow__button" onClick={follow}>Follow</button>
+                        <div className="account__following account__following--other">
+                            <span className="smaller account__following--title" onClick={() => following.length !== 0 && (document.querySelector(".account__following").classList += " following__open")}>Following: {following.length}</span>
+                            <div className="following__users following__users--other">
+                                {
+                                    !loading &&
+                                    following.map(user => {
+                                        return (
+                                            <Following user={user} />
+                                        )
+                                    })
+                                }
+                                <FontAwesomeIcon icon="fa-solid fa-x" className="following__closer" onClick={() => document.querySelector(".account__following").classList.remove("following__open")}/>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className="account__lower">

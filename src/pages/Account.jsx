@@ -15,7 +15,7 @@ const Account = ({ user, userInfo }) => {
     const [likedMovies, setLikedMovies] = useState()
     const [loading, setLoading] = useState(true)
     const [otherUsername, setOtherUsername] = useState()
-    const [following, setFollowing] = useState('0')
+    const [following, setFollowing] = useState([])
 
     async function getLikedMovies() {
         const likeCollectionRef = await query(

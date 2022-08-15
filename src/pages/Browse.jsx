@@ -53,7 +53,7 @@ const Browse = () => {
                 <div className="movies__container">
                 {  
                     loading ? ( 
-                        new Array(10).fill(0).map((_, index) => (
+                        new Array(8).fill(0).map((_, index) => (
                             <div className="movie__skeleton" key={index}>
                                 <div className="movie__img">
                                     <p className="movie__img--skeleton"></p>

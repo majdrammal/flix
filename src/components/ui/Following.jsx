@@ -8,7 +8,7 @@ const Following = ({ user }) => {
     return (
         <div className="following__user">
             <img src={user.followedImage} alt="" className="following__user--img" />
-            <p className="following__user--username" onClick={() => navigate(`/user/${user.followedUsername}`)}>{user.followedUsername}</p>
+            <p className="following__user--username" onClick={() => window.location.href = `/user/${user.followedUsername}`}>{user.followedUsername}</p>
         </div>
     );
 }
