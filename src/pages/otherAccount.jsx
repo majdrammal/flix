@@ -19,6 +19,7 @@ const OtherAccount = ({ user, mainUserInfo }) => {
     const [following, setFollowing] = useState([])
 
     async function getUserByUsername() {
+        setLoading(true)
         const userRef = await query(
             collection(db, "users"),
             where("username", "==", username)
@@ -119,7 +120,9 @@ const OtherAccount = ({ user, mainUserInfo }) => {
                         </div>
                     </div>
                     <div className="account__upper--right">
-                        <button className="follow__button" onClick={follow}>Follow</button>
+                        {
+                            <button className="follow__button" onClick={follow}>Follow</button>
+                        }
                         <div className="account__following account__following--other">
                             <span className="smaller account__following--title" onClick={() => following.length !== 0 && (document.querySelector(".account__following").classList += " following__open")}>Following: {following.length}</span>
                             <div className="following__users following__users--other">

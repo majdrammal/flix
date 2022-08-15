@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Nav from '../components/Nav';
 import Copyright from '../components/Copyright';
 import SearchBar from '../components/ui/searchBar';

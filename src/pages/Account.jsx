@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { getDoc, doc, setDoc } from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom';
 import { db } from '../firebase-config';
 import { collection, getDocs, query, where, deleteDoc } from 'firebase/firestore'
@@ -8,7 +9,7 @@ import LikedMovie from '../components/ui/LikedMovie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Following from '../components/ui/Following';
 
-const Account = ({ user, userInfo }) => {
+const Account = ({ user }) => {
 
     let navigate = useNavigate()
 
@@ -16,6 +17,7 @@ const Account = ({ user, userInfo }) => {
     const [loading, setLoading] = useState(true)
     const [otherUsername, setOtherUsername] = useState()
     const [following, setFollowing] = useState([])
+    const [userInfo, setUserInfo] = useState()
 
     async function getLikedMovies() {
         const likeCollectionRef = await query(
@@ -39,8 +41,15 @@ const Account = ({ user, userInfo }) => {
         }
     }
 
+    async function getUserById() {
+        const userRef = doc(db, "users", user.uid)
+        const userSnap = await getDoc(userRef)
+        setUserInfo(userSnap.data())
+      }
+
     useEffect(() => {
         getLikedMovies()
+        getUserById()
     }, [user])
 
     return (
@@ -56,9 +65,8 @@ const Account = ({ user, userInfo }) => {
                         </div>
                         <div className="account__details">
                             {
-                                userInfo && 
-                            
-                            <h1 className="account__name">{userInfo.username}</h1>
+                                userInfo &&  
+                                <h1 className="account__name">{userInfo.username}</h1>
                             }
                             <p className="account__status">Online</p>
                         </div>
