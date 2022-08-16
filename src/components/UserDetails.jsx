@@ -31,7 +31,7 @@ const UserDetails = () => {
         const userRef = doc(db, "users", user.uid)
         const userSnap = await getDoc(userRef)
         return userSnap.data()
-      }
+    }
 
     return (
         <div id="user__details">
@@ -39,10 +39,10 @@ const UserDetails = () => {
                 <h3 className="user__details--title">
                     What Should We Call You?
                 </h3>
-                <form className="user__details--form" onKeyPress={(event) => event.key === 'Enter' && addUsername()}>
+                <form className="user__details--form">
                     <div className="form__item">
                         <label className="form__item--label">Nickname</label>
-                        <input type="name"  className="input" required onChange={(event) => setUsername(event.target.value)}/>
+                        <input type="name"  className="input" required onChange={(event) => setUsername(event.target.value)} onKeyPress={(event) => event.key === 'Enter' && addUsername()}/>
                     </div>
                     <button type='button' className="form__submit" onClick={() => addUsername()}>
                         Submit
