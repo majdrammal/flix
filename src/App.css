@@ -649,11 +649,6 @@ nav {
   justify-content: center;
 }
 
-/* .movie__details--no-img {
-  height: 100%;
-  width: 60%;
-} */
-
 .movie__details--right {
   width: 60%;
 }
@@ -815,7 +810,7 @@ nav {
   overflow: hidden;
   display: flex;
   visibility: hidden;
-  z-index: -1; /* fixed input boxes showing up briefly after closing modal*/
+  z-index: -1; 
   transition: visibility 1s, z-index 1s, box-shadow 0.5s ease;
 }
 
@@ -964,7 +959,7 @@ nav {
 }
 
 .fa-spinner {
-  animation: spinner 750ms infinite linear; /* infinite keeps repeating, linear as if it never stops */
+  animation: spinner 750ms infinite linear; 
 }
 
 @keyframes spinner {
@@ -1258,3 +1253,90 @@ nav {
 .comment {
   color: white;
 }
+
+/* 
+
+  RESPONSIVENESS
+
+*/
+
+/* SMALL COMPUTERS + IPADS */
+
+@media (max-width: 930px) {
+
+  /* NAV */
+
+  .nav__container {
+    width: 90%;
+  }
+
+  /* HOME */
+
+  .home__main {
+    width: 100%;
+  }
+
+  .home__main--title {
+    font-size: 35px;
+  }
+
+  .search__input {
+    width: 600px !important;
+  }
+
+  /* BROWSE */
+
+  .movie, .movie__skeleton {
+    width: 40%;
+  }
+
+  /* DETAILS */
+
+  .details__container {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .movie__details, .movie__details--skeleton {
+    flex-direction: column;
+  }
+
+  .movie__details--left {
+    margin-bottom: 10px;
+  }
+
+  .movie__details--right {
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .movie__details--skeleton div {
+    margin: 10px auto;
+  }
+
+  .movie__details--img--skeleton {
+    margin: 10px 0px !important;
+  }
+
+  .movie__details--plot-skeleton {
+    width: 100%;
+  }
+
+  .movie__details--plot, .movie__details--plot-skeleton{
+    max-width: none;
+  }
+
+  .back {
+    margin-top: 10px;
+    width: 30%;
+  }
+
+  /* ACCOUNT */
+
+  .account__name {
+    margin-right: 10px;
+    font-size: 40px;
+  }
+
+}
+
