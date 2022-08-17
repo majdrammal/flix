@@ -80,8 +80,11 @@ const Details = ({ user }) => {
         return picSnap.data()
       }
 
+      // + dark cover
+
     return (
         <div id="details">
+            <div className="dark__cover"></div>
             <Nav />  
             <div className="details__container">
                 <div className="back" onClick={() => navigate(-1)}>

@@ -30,10 +30,11 @@ const Browse = () => {
 
     useEffect(() => {
         getMovies()
-    }, [])
+    }, [title])
 
     return (
         <div id="browse">
+            <div className="dark__cover"></div>
             <Nav />
             <div className="browse__search">
             <InputChildren 
@@ -43,8 +44,8 @@ const Browse = () => {
                 value={searchTitle} 
                 onChange={(event) => setSearchTitle(event.target.value)}
                 onKeyPress={(event) => event.key === 'Enter' && newSearch()}>
-                    <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" className="search__icon" onClick={newSearch} />
-                </InputChildren>
+                <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" className="search__icon" onClick={newSearch} />
+            </InputChildren>
             </div>
             <div className="movies__section">
                 <p className="browse__results">

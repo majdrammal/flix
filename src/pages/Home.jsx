@@ -1,27 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Nav from '../components/Nav';
 import Copyright from '../components/Copyright';
 import SearchBar from '../components/ui/searchBar';
+import logo from '../assets/logo.png'
 
 const Home = ({ user }) => {
 
-    function registerOpen() {
-        document.querySelector(".App").classList += " register__open"
-    }
-    
-    function loginOpen() {
-        document.querySelector(".App").classList += " login__open"
+    function modalOpen(modal) {
+        document.querySelector(".App").classList += ` ${modal}__open`
     }
 
     useEffect(() => {
-        document.querySelector("nav").style.background = "#242424"
+        document.querySelector("nav").style.background = "#24242450"
+        document.querySelector("#home").classList += " welcome__open"
+        setTimeout(() => {
+        document.querySelector("#home").classList.remove("welcome__open")
+        }, 2000)
     }, [])
+
 
     return (
         <div id="home">
-            <img src="https://wallpaperaccess.com/full/752715.jpg" alt="" className="home__bg"/>
+            <div className="welcome">
+                Welcome to
+                <img src={logo} alt="" className="welcome__logo"/>
+                <div className="loading__bar--wrapper">
+                    <div className="loading__bar"></div>
+                </div>
+            </div>
             <div className="dark__cover"></div>
-            <Nav user={user}/>
+            <Nav user={user} />
             <div className="home__main">
                 <h1 className="home__main--title">
                     Search for your favorite Films &amp; TV Shows
@@ -31,8 +39,8 @@ const Home = ({ user }) => {
                     {
                         !user && 
                         <>
-                        <p className="home__main--login" onClick={loginOpen}>Login</p>
-                        <p className="home__main--create" onClick={registerOpen}>Create an account</p>
+                        <p className="home__main--login" onClick={() => modalOpen('login')}>Login</p>
+                        <p className="home__main--create" onClick={() => modalOpen('register')}>Create an account</p>
                         </>
                     }
                 </div>

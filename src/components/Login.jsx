@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { auth } from '../firebase-config';
 import { 
@@ -7,15 +7,13 @@ import {
 
 const Login = () => {
 
-    const [user, setUser] = useState()
     const [loginEmail, setLoginEmail] = useState("")
     const [loginPassword, setLoginPassword] = useState("")
 
     function login() {
         signInWithEmailAndPassword(auth, loginEmail, loginPassword)
-        .then(({ user }) => {
+        .then(() => {
             document.querySelector(".App").classList += " logged__in"
-            setUser(user)
             loginClose()
         })
         .catch(() => {

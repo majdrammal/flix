@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { auth, db } from '../firebase-config';
-import { collection, addDoc, getDocs, getDoc, doc, query, where, updateDoc, deleteDoc } from 'firebase/firestore'
+import { auth } from '../firebase-config';
 import { 
   createUserWithEmailAndPassword, 
 } from 'firebase/auth';
@@ -10,17 +9,15 @@ const Register = () => {
 
     const [registerEmail, setRegisterEmail] = useState("")
     const [registerPassword, setRegisterPassword] = useState("")
-    const [user, setUser] = useState()
     
     function register() {
         createUserWithEmailAndPassword(auth, registerEmail, registerPassword)
-        .then((user) => {
-            setUser(user)
+        .then(() => {
             registerClose()
             document.querySelector(".App").classList += " username__overlay"
         })
-        .catch((error) => {
-            console.log(error)
+        .catch(() => {
+            'Please enter a valid E-mail and Password'
         })
     }
 

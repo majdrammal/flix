@@ -10,14 +10,9 @@ import { onAuthStateChanged } from 'firebase/auth';
 const Nav = () => {
 
     const [user, setUser] = useState()
-    const [loading, isLoading] = useState(true)
 
-    function registerOpen() {
-        document.querySelector(".App").classList += " register__open"
-    }
-    
-    function loginOpen() {
-        document.querySelector(".App").classList += " login__open"
+    function modalOpen(modal) {
+        document.querySelector(".App").classList += ` ${modal}__open`
     }
 
     function logout() {
@@ -29,7 +24,6 @@ const Nav = () => {
     useEffect(() => {
       onAuthStateChanged(auth, (user) => {
           if (user) {
-        //   setLoading(false)
           setUser(user)
           }
       })
@@ -48,8 +42,8 @@ const Nav = () => {
                     <a href="https://www.google.com" target="_blank" className="social__link">
                         <FontAwesomeIcon icon="fa-brands fa-twitter"/>
                     </a>
-                    {!user && <button className="login__btn" onClick={loginOpen}>Log In</button>}
-                    {!user && <button className="signup__btn" onClick={registerOpen}>Sign Up</button>}
+                    {!user && <button className="login__btn" onClick={() => modalOpen('login')}>Log In</button>}
+                    {!user && <button className="signup__btn" onClick={() => modalOpen('register')}>Sign Up</button>}
                     {user && <Link to="/myaccount" className="profile__btn" >Account </Link>}
                     {user && <a href="/" className="logout__btn" onClick={logout}>Logout</a>}
                 </div>
