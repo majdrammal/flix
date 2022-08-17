@@ -12,8 +12,6 @@ import { getDoc, doc, setDoc } from 'firebase/firestore'
 import Account from './pages/Account';
 import UserDetails from './components/UserDetails';
 import OtherAccount from './pages/otherAccount';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import logo from './assets/logo.png'
 
 function App() {
 

@@ -17,7 +17,8 @@ const UserDetails = () => {
           })
     }, [user]) 
 
-    async function addUsername() {
+    async function addUsername(e) {
+        e.preventDefault()
         const currentState = await getUserById()
         setDoc(doc(db, 'users', user.uid), {
             ... currentState,
@@ -42,9 +43,9 @@ const UserDetails = () => {
                 <form className="user__details--form">
                     <div className="form__item">
                         <label className="form__item--label">Nickname</label>
-                        <input type="name"  className="input" required onChange={(event) => setUsername(event.target.value)} onKeyPress={(event) => event.key === 'Enter' && addUsername()}/>
+                        <input type="name"  className="input" required onChange={(event) => setUsername(event.target.value)} onKeyPress={(event) => event.key === 'Enter' && addUsername(event)}/>
                     </div>
-                    <button type='button' className="form__submit" onClick={() => addUsername()}>
+                    <button type='button' className="form__submit" onClick={(event) => addUsername(event)}>
                         Submit
                     </button>
                 </form>

@@ -73,7 +73,7 @@ const Account = ({ user }) => {
                     </div>
                     <div className="account__upper--right" onKeyPress={(event) => event.key === 'Enter' && navigate(`/user/${otherUsername}`)}>
                         <h3 className="search__friends">Search for users:</h3>
-                        <input type="search" placeholder="Search by username..." className="input search__friends--input" onChange={(event) => setOtherUsername(event.target.value)}/>
+                        <input type="text" placeholder="Search by username..." className="input search__friends--input" onChange={(event) => setOtherUsername(event.target.value)}/>
                         <div className="account__following">
                             <span className="smaller account__following--title" onClick={() => following.length !== 0 && (document.querySelector(".account__following").classList += " following__open")}>Following: {following.length}</span>
                             <div className="following__users">
