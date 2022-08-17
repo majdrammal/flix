@@ -17,7 +17,7 @@ const Login = () => {
             loginClose()
         })
         .catch(() => {
-            alert('Wrong Email or Password')
+            document.querySelector(".error__login").innerHTML = "Wrong Email or Password! Please try again."
         })
     }
 
@@ -32,6 +32,7 @@ const Login = () => {
                 <h3 className="login__title">
                     Log In to Flix!
                 </h3>
+                <p className="error error__login"></p>
                 <form className="login__form" onKeyPress={(event) => event.key === 'Enter' && login()}>
                     <div className="form__item">
                         <label className="form__item--label">Email</label>

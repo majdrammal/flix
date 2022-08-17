@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { db } from '../firebase-config';
 import { query, collection, getDocs, where, setDoc, doc, deleteDoc } from 'firebase/firestore';
 import Copyright from '../components/Copyright';
@@ -12,11 +12,14 @@ const OtherAccount = ({ user, mainUserInfo }) => {
 
     const { username } = useParams()
 
+    let navigate = useNavigate()
+
     const [userInfo, setUserInfo] = useState()
     const [loading, setLoading] = useState(true)
     const [likedMovies, setLikedMovies] = useState()
     const [id, setId] = useState()
     const [following, setFollowing] = useState([])
+    const [followed, setFollowed]= useState(false)
 
     async function getUserByUsername() {
         setLoading(true)
@@ -40,11 +43,8 @@ const OtherAccount = ({ user, mainUserInfo }) => {
         getFollowing()
     }
 
-    let isFollowed = false
     function follow() {
-        if (!isFollowed) {
-            document.querySelector(".follow__button").classList += ' is__followed'
-            document.querySelector(".follow__button").innerHTML = "Unfollow"
+        if (!followed) {
             setDoc(doc(db, 'friends', id + user.uid), {
                 followerUid: user.uid,
                 followerUsername: mainUserInfo.username,
@@ -53,14 +53,12 @@ const OtherAccount = ({ user, mainUserInfo }) => {
                 followedUsername: username,
                 followedImage: userInfo[0].image
             })
-            isFollowed = true
+            setFollowed(true)
         } 
         else {
-            document.querySelector(".follow__button").classList.remove('is__followed')
-            document.querySelector(".follow__button").innerHTML = "Follow"
             const friendsRef = doc(db, "friends", id + user.uid)
             deleteDoc(friendsRef)
-            isFollowed = false
+            setFollowed(false)
         }
     }
 
@@ -72,9 +70,7 @@ const OtherAccount = ({ user, mainUserInfo }) => {
         )
         const { docs } = await getDocs(friendsCollectionRef)
         let followed = docs.map(doc => doc.data()).filter(e => e.followedUid == id)
-        followed.length !== 0 && ( document.querySelector(".follow__button").classList += ' is__followed')
-        followed.length !== 0 && ( document.querySelector(".follow__button").innerHTML = "Unfollow")
-        followed.length !== 0 ? isFollowed = true : isFollowed = false
+        followed.length !== 0 ? setFollowed(true) : setFollowed(false)
         }
     }
 
@@ -91,14 +87,14 @@ const OtherAccount = ({ user, mainUserInfo }) => {
     }
 
     useEffect(() => {
-        getUserByUsername()
-        checkIfUserIsFollowed()
-    }, [id])
-
-    useEffect(() => {
-        getUserByUsername()
-        checkIfUserIsFollowed()
-    }, [username])
+        if (username === mainUserInfo.username) {
+            navigate('/myaccount')
+        }
+        else {
+            getUserByUsername()
+            checkIfUserIsFollowed()
+        }
+    }, [id, username])
 
     return (
         <div id="account">
@@ -121,7 +117,13 @@ const OtherAccount = ({ user, mainUserInfo }) => {
                     </div>
                     <div className="account__upper--right">
                         {
-                            <button className="follow__button" onClick={follow}>Follow</button>
+                            !followed ? (
+                                <button className="follow__button" onClick={follow}>Follow</button>
+                            )
+                            :
+                            (
+                                <button className="follow__button is__followed" onClick={follow}>Unfollow</button>
+                            )
                         }
                         <div className="account__following account__following--other">
                             <span className="smaller account__following--title" onClick={() => following.length !== 0 && (document.querySelector(".account__following").classList += " following__open")}>Following: {following.length}</span>

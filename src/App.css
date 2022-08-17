@@ -10,6 +10,57 @@
 .App {
   background-image: url("https://wallup.net/wp-content/uploads/2019/09/859165-poster-movie-film-movies-posters.jpg");
   animation: movingBg 75000ms infinite linear;
+  position: relative;
+}
+
+.welcome {
+  z-index: 100;
+  background-color: black;
+  position: absolute;
+  top: 0;
+  left: -100vw;
+  width: 100%;
+  height: 100%;
+  font-size: 25px;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-transform: uppercase;
+  transition: all 300ms ease;
+}
+
+.loading__bar--wrapper {
+  margin-top: 20px;
+  height: 3px;
+  width: 175px;
+  background-color: rgba(135, 135, 135, 0.531);
+  position: relative;
+}
+
+.loading__bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: white;
+  height: 100%;
+  animation: loadingBar 2000ms ;
+}
+
+@keyframes loadingBar {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+.welcome__open .welcome{
+  display: flex;
+  left: 0;
 }
 
 @keyframes movingBg {
@@ -182,55 +233,6 @@ nav {
   position: relative;
 }
 
-.welcome {
-  z-index: 100;
-  background-color: black;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  font-size: 25px;
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  text-transform: uppercase;
-}
-
-.loading__bar--wrapper {
-  margin-top: 20px;
-  height: 3px;
-  width: 175px;
-  background-color: rgba(135, 135, 135, 0.531);
-  position: relative;
-}
-
-.loading__bar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: white;
-  height: 100%;
-  animation: loadingBar 2000ms ;
-}
-
-@keyframes loadingBar {
-  0% {
-    width: 0%;
-  }
-
-  100% {
-    width: 100%;
-  }
-}
-
-.welcome__open .welcome{
-  display: flex;
-}
-
-
 .home__bg {
   position: absolute;
   top: 0;
@@ -301,18 +303,7 @@ nav {
   justify-content: center;
   width: 60%;
   margin: 0 auto;
-  animation: fadeIn 1500ms 2000ms;
-  z-index: 0;
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
+  transition: all 1500ms ease;
 }
 
 .home__main--title {
@@ -805,6 +796,13 @@ nav {
 
 */
 
+.error {
+  color: red;
+  z-index: 1;
+  font-size: 20px;
+  text-align: center;
+}
+
 #register, #login, #user__details {
   position: fixed;
   top: 50%;
@@ -874,7 +872,6 @@ nav {
 .register__title, .login__title, .user__details--title {
   font-size: 55px;
   text-align: center;
-  margin-bottom: 32px;
   z-index: 1;
 }
 

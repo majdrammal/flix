@@ -17,7 +17,8 @@ const Register = () => {
             document.querySelector(".App").classList += " username__overlay"
         })
         .catch(() => {
-            'Please enter a valid E-mail and Password'
+            document.querySelector(".error__register").innerHTML = "Invalid Email or Password! Password must be at least 6 characters long."
+
         })
     }
 
@@ -32,6 +33,7 @@ const Register = () => {
                 <h3 className="register__title">
                     Register to Flix!
                 </h3>
+                <p className="error error__register"></p>
                 <form className="register__form" onKeyPress={(event) => event.key === 'Enter' && register()}>
                     <div className="form__item">
                         <label className="form__item--label">Email</label>

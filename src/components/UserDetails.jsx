@@ -10,7 +10,6 @@ const UserDetails = () => {
 
     useEffect(() => {
         onAuthStateChanged(auth, async (user) => {
-            // setLoading(false)
             if (user) {
             setUser(user)      
             }

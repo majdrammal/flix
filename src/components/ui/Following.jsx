@@ -5,9 +5,9 @@ const Following = ({ user }) => {
     return (
         <div className="following__user">
             <img src={user.followedImage} alt="" className="following__user--img" />
-            <a href={`/user/${user.followedUsername}`}>
-                <p className="following__user--username">{user.followedUsername}</p>
-            </a>
+            <Link to={`/user/${user.followedUsername}`}>
+                <p className="following__user--username" onClick={() => document.querySelector(".account__following").classList.remove("following__open")}>{user.followedUsername}</p>
+            </Link>
         </div>
     );
 }

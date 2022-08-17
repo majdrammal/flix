@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import Nav from '../components/Nav';
 import Copyright from '../components/Copyright';
 import SearchBar from '../components/ui/searchBar';
-import logo from '../assets/logo.png'
 
 const Home = ({ user }) => {
 
@@ -12,22 +11,11 @@ const Home = ({ user }) => {
 
     useEffect(() => {
         document.querySelector("nav").style.background = "#24242450"
-        document.querySelector("#home").classList += " welcome__open"
-        setTimeout(() => {
-        document.querySelector("#home").classList.remove("welcome__open")
-        }, 2000)
     }, [])
 
 
     return (
         <div id="home">
-            <div className="welcome">
-                Welcome to
-                <img src={logo} alt="" className="welcome__logo"/>
-                <div className="loading__bar--wrapper">
-                    <div className="loading__bar"></div>
-                </div>
-            </div>
             <div className="dark__cover"></div>
             <Nav user={user} />
             <div className="home__main">

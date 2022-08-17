@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { getDoc, doc, setDoc } from 'firebase/firestore'
+import { getDoc, doc } from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom';
 import { db } from '../firebase-config';
-import { collection, getDocs, query, where, deleteDoc } from 'firebase/firestore'
+import { collection, getDocs, query, where } from 'firebase/firestore'
 import Nav from '../components/Nav';
 import Copyright from '../components/Copyright';
 import LikedMovie from '../components/ui/LikedMovie';

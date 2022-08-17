@@ -13,6 +13,8 @@ const Nav = () => {
 
     function modalOpen(modal) {
         document.querySelector(".App").classList += ` ${modal}__open`
+        document.querySelector(".error__register").innerHTML = ""
+        document.querySelector(".error__login").innerHTML = ""
     }
 
     function logout() {

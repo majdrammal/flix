@@ -12,6 +12,7 @@ import { getDoc, doc, setDoc } from 'firebase/firestore'
 import Account from './pages/Account';
 import UserDetails from './components/UserDetails';
 import OtherAccount from './pages/otherAccount';
+import Welcome from './components/Welcome';
 
 function App() {
 
@@ -19,6 +20,10 @@ function App() {
   const [userInfo, setUserInfo] = useState()
 
   useEffect(() => {
+      document.querySelector(".App").classList += " welcome__open"
+      setTimeout(() => {
+      document.querySelector(".App").classList.remove("welcome__open")
+      }, 2000)
       onAuthStateChanged(auth, async (user) => {
           // setLoading(false)
           if (user) {
@@ -43,6 +48,7 @@ function App() {
   return (
     <Router>
       <div className="App">
+        <Welcome />
         <Routes>
             <Route path='/' element={<Home user={user} />} />
             <Route path=':title' element={<Browse />} />
