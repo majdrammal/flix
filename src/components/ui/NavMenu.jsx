@@ -30,6 +30,11 @@ const NavMenu = ({ user, auth }) => {
         document.querySelector(".App").classList = ("App")
     }
 
+    function goToAccount() {
+        document.body.classList.remove('nav__menu--open')
+        navigate('/myaccount')
+    }
+
     return (
         <>
         <div className="nav__menu" onClick={navMenuOpen}>
@@ -47,7 +52,7 @@ const NavMenu = ({ user, auth }) => {
             }
             {
                 user &&
-                <p className="nav__menu--link" onClick={() => navigate('/myaccount')}>Account</p>
+                <p className="nav__menu--link" onClick={goToAccount}>Account</p>
             }
             {
                 user &&
