@@ -44,9 +44,9 @@ function App() {
   }
 
   useEffect(() => {
-    document.querySelector(".App").classList += " welcome__open"
+    document.querySelector("#root").classList += " welcome__open"
     setTimeout(() => {
-    document.querySelector(".App").classList.remove("welcome__open")
+    document.querySelector("#root").classList.remove("welcome__open")
     }, 2000)
     console.log('lol')
   }, [])

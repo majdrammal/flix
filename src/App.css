@@ -7,7 +7,7 @@
   font-family: 'Teko', sans-serif;
 }
 
-.App {
+#root {
   background-image: url("https://wallup.net/wp-content/uploads/2019/09/859165-poster-movie-film-movies-posters.jpg");
   animation: movingBg 75000ms infinite linear;
   position: relative;
@@ -18,9 +18,9 @@
   background-color: black;
   position: absolute;
   top: 0;
-  left: -100vw;
+  left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   font-size: 25px;
   display: none;
   flex-direction: column;
@@ -46,6 +46,7 @@
   background-color: white;
   height: 100%;
   animation: loadingBar 2000ms ;
+  animation-fill-mode: forwards;
 }
 
 @keyframes loadingBar {
@@ -62,6 +63,10 @@
   display: flex;
   left: 0;
 }
+
+.welcome__open #home, .welcome__open #browse, .welcome__open #details, .welcome__open #account {
+  display: none;
+} 
 
 @keyframes movingBg {
   0% {

@@ -82,18 +82,16 @@ const OtherAccount = ({ user, mainUserInfo }) => {
             )
             const { docs } = await getDocs(friendsCollectionRef)
             setFollowing(docs.map(doc => doc.data()))
+            if (username === mainUserInfo.username) {
+            navigate('/myaccount')
+            }
             setLoading(false)
         }
     }
 
     useEffect(() => {
-        if (username === mainUserInfo.username) {
-            navigate('/myaccount')
-        }
-        else {
             getUserByUsername()
             checkIfUserIsFollowed()
-        }
     }, [id, username])
 
     return (
