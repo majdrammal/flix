@@ -32,8 +32,6 @@ function App() {
             })
           }
         })
-    console.log('lolz')
-
   }, [user]) 
 
   async function getUserById(id) {
@@ -48,7 +46,6 @@ function App() {
     setTimeout(() => {
     document.querySelector("#root").classList.remove("welcome__open")
     }, 2000)
-    console.log('lol')
   }, [])
 
   return (
