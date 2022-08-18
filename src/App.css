@@ -1346,6 +1346,7 @@ nav {
 
   .home__main--title {
     font-size: 35px;
+    margin: 0 20px;
   }
 
   .search__input {
@@ -1414,7 +1415,7 @@ nav {
 
   /* NAV */
   
-  .login__btn, .signup__btn, .profile__btn, .login__btn, .social__link {
+  .login__btn, .signup__btn, .profile__btn, .logout__btn, .social__link {
     display: none;
   }
 
@@ -1447,6 +1448,41 @@ nav {
     font-size: 30px;
   }
 
+  /* LOGIN / REGISTER / USER DETAILS */
+
+  #login, #register {
+   width: 100vw; 
+  }
+
+  .login__container, .register__container {
+  height: 100%;
+  width: 100%;
+  padding: 5px;
+  }
+
+  .login__closer, .register__closer {
+  margin-top: 10px;
+  }
+
+  .login__title, .register__title {
+    font-size: 35px;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .error {
+    margin-bottom: 10px;
+  }
+
+  .form__item--label {
+    font-size: 22.5px;
+  }
+
+  .form__item input {
+    height: 40px;
+    font-size: 20px;
+  }
+
   /* BROWSE */
 
   .movie {
@@ -1477,6 +1513,10 @@ nav {
     margin-right: 0;
   }
 
+  .movie__skeleton {
+    width: 90%;
+    margin: 10px auto;
+  }
 
 }
 

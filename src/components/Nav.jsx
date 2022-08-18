@@ -49,7 +49,7 @@ const Nav = () => {
                     {!user && <button className="signup__btn" onClick={() => modalOpen('register')}>Sign Up</button>}
                     {user && <Link to="/myaccount" className="profile__btn" >Account </Link>}
                     {user && <a href="/" className="logout__btn" onClick={logout}>Logout</a>}
-                    <NavMenu user={user}/>
+                    <NavMenu user={user} auth={auth}/>
                 </div>
             </div>
         </nav>

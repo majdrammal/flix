@@ -1,7 +1,10 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useNavigate } from 'react-router-dom'
+import { signOut } from 'firebase/auth';
 
-const NavMenu = ({ user }) => {
+const NavMenu = ({ user, auth }) => {
+
+    let navigate = useNavigate()
 
     let isNavOpen = false
     function navMenuOpen() {
@@ -22,6 +25,11 @@ const NavMenu = ({ user }) => {
         document.querySelector(".error__login").innerHTML = ""
     }
 
+    function logout() {
+        signOut(auth)
+        document.querySelector(".App").classList = ("App")
+    }
+
     return (
         <>
         <div className="nav__menu" onClick={navMenuOpen}>
@@ -29,8 +37,22 @@ const NavMenu = ({ user }) => {
             <hr className="nav__menu--icon"></hr>
         </div>
         <div className="nav__menu--page">
-            <p className="nav__menu--link" onClick={() => modalOpen('login')}>Log In</p>
-            <p className="nav__menu--link" onClick={() => modalOpen('register')}>Sign Up</p>
+            {
+                !user &&
+                <p className="nav__menu--link" onClick={() => modalOpen('login')}>Log In</p>
+            }
+            {
+                !user &&
+                <p className="nav__menu--link" onClick={() => modalOpen('register')}>Sign Up</p>
+            }
+            {
+                user &&
+                <p className="nav__menu--link" onClick={() => navigate('/myaccount')}>Account</p>
+            }
+            {
+                user &&
+                <a href="/" className="nav__menu--link" onClick={logout}>Logout</a>
+            }
             <a href="www.google.com" className="nav__menu--link">Instagram</a>
             <a href="www.google.com" className="nav__menu--link">Twitter</a>
         </div>
