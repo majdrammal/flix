@@ -20,10 +20,6 @@ function App() {
   const [userInfo, setUserInfo] = useState()
 
   useEffect(() => {
-      document.querySelector(".App").classList += " welcome__open"
-      setTimeout(() => {
-      document.querySelector(".App").classList.remove("welcome__open")
-      }, 2000)
       onAuthStateChanged(auth, async (user) => {
           // setLoading(false)
           if (user) {
@@ -36,6 +32,8 @@ function App() {
             })
           }
         })
+    console.log('lolz')
+
   }, [user]) 
 
   async function getUserById(id) {
@@ -44,6 +42,14 @@ function App() {
     setUserInfo(userSnap.data())
     return userSnap.data()
   }
+
+  useEffect(() => {
+    document.querySelector(".App").classList += " welcome__open"
+    setTimeout(() => {
+    document.querySelector(".App").classList.remove("welcome__open")
+    }, 2000)
+    console.log('lol')
+  }, [])
 
   return (
     <Router>

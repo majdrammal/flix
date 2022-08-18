@@ -42,7 +42,7 @@ const Login = () => {
                         <label className="form__item--label">Password</label>
                         <input type="password" className="input" required onChange={(event) => setLoginPassword(event.target.value)}></input>
                     </div>
-                    <button type='button' className="form__submit" onClick={login}>
+                    <button type='button' className="form__submit" onClick={() => login()}>
                         Log In
                     </button>
                 </form>
