@@ -13,6 +13,10 @@
   position: relative;
 }
 
+.lowercase {
+  text-transform: lowercase;
+}
+
 .welcome {
   z-index: 100;
   background-color: black;
@@ -1067,6 +1071,10 @@ nav {
   position: relative;
 }
 
+.remove__bg #root {
+  background-image: none;
+}
+
 .account__container {
   width: 80%;
   margin: 0 auto;
@@ -1450,11 +1458,11 @@ nav {
 
   /* LOGIN / REGISTER / USER DETAILS */
 
-  #login, #register {
+  #login, #register, #user__details {
    width: 100vw; 
   }
 
-  .login__container, .register__container {
+  .login__container, .register__container, .user__details--container {
   height: 100%;
   width: 100%;
   padding: 5px;
@@ -1464,7 +1472,7 @@ nav {
   margin-top: 10px;
   }
 
-  .login__title, .register__title {
+  .login__title, .register__title, .user__details--title {
     font-size: 35px;
     width: 100%;
     margin-bottom: 10px;
@@ -1532,6 +1540,7 @@ nav {
   .account__status {
     font-size: 17.5px;
     margin-bottom: 10px;
+    text-align: center;
   }
 
   .account__upper--left {

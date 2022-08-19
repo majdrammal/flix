@@ -52,6 +52,10 @@ const Account = ({ user }) => {
         getUserById()
     }, [user])
 
+    useEffect(() => {
+        document.querySelector("body").classList += " remove__bg"
+    }, [])
+
     return (
         <div id="account">
             <Nav />

@@ -25,7 +25,7 @@ const OtherAccount = ({ user, mainUserInfo }) => {
         setLoading(true)
         const userRef = await query(
             collection(db, "users"),
-            where("username", "==", username)
+            where("username", "==", username.toLowerCase())
         )
         const { docs } = await getDocs(userRef)
         setUserInfo(docs.map(doc => doc.data()))
@@ -50,7 +50,7 @@ const OtherAccount = ({ user, mainUserInfo }) => {
                 followerUsername: mainUserInfo.username,
                 followerImage: mainUserInfo.image,
                 followedUid: id,
-                followedUsername: username,
+                followedUsername: username.toLowerCase(),
                 followedImage: userInfo[0].image
             })
             setFollowed(true)
@@ -94,6 +94,10 @@ const OtherAccount = ({ user, mainUserInfo }) => {
             checkIfUserIsFollowed()
     }, [id, username])
 
+    useEffect(() => {
+        document.querySelector("body").classList += " remove__bg"
+    }, [])
+
     return (
         <div id="account">
             <Nav />
@@ -106,7 +110,7 @@ const OtherAccount = ({ user, mainUserInfo }) => {
                             }
                         </div>
                         <div className="account__details">
-                                <h1 className="account__name">{username}</h1>
+                                <h1 className="account__name">{username.toLowerCase()}</h1>
                             {
                                 !loading &&  
                                 <p className="account__status">Last Online: {userInfo[0].lastOnline}</p>

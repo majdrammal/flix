@@ -32,6 +32,10 @@ const Browse = () => {
         getMovies()
     }, [title])
 
+    useEffect(() => {
+        document.querySelector("body").classList.remove("remove__bg")
+    }, [])
+
     return (
         <div id="browse">
             <div className="dark__cover"></div>

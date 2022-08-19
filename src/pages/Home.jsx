@@ -11,6 +11,7 @@ const Home = ({ user }) => {
 
     useEffect(() => {
         document.querySelector("nav").style.background = "#24242450"
+        document.querySelector("body").classList.remove("remove__bg")
     }, [])
 
 

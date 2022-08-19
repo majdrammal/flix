@@ -21,7 +21,7 @@ const UserDetails = () => {
         const currentState = await getUserById()
         setDoc(doc(db, 'users', user.uid), {
             ... currentState,
-            username: username,
+            username: username.toLowerCase(),
             image: "https://www.portmelbournefc.com.au/wp-content/uploads/2022/03/avatar-1.jpeg"
           })
           document.querySelector(".App").classList.remove("username__overlay")
@@ -42,7 +42,7 @@ const UserDetails = () => {
                 <form className="user__details--form">
                     <div className="form__item">
                         <label className="form__item--label">Nickname</label>
-                        <input type="name"  className="input" required onChange={(event) => setUsername(event.target.value)} onKeyPress={(event) => event.key === 'Enter' && addUsername(event)}/>
+                        <input type="name"  className="input lowercase" required onChange={(event) => setUsername(event.target.value)} onKeyPress={(event) => event.key === 'Enter' && addUsername(event)}/>
                     </div>
                     <button type='button' className="form__submit" onClick={(event) => addUsername(event)}>
                         Submit

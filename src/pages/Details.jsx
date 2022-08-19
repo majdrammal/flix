@@ -50,7 +50,12 @@ const Details = ({ user }) => {
     useEffect(() => {
         getMovieDetails()
         checkIfMovieIsLiked()
+        document.querySelector("#root").style.background = "./assets/root-bg.jpg";
     }, [user])
+
+    useEffect(() => {
+        document.querySelector("body").classList.remove("remove__bg")
+    }, [])
 
     let navigate = useNavigate()
 
