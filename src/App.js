@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import Home from './pages/Home';
 import Browse from './pages/Browse';
 import Details from './pages/Details';
@@ -53,11 +53,14 @@ function App() {
       <div className="App">
         <Welcome />
         <Routes>
+            <Route path="*" element={<Navigate to="/" />} />
             <Route path='/' element={<Home user={user} />} />
             <Route path=':title' element={<Browse />} />
             <Route path='/details' element={<Details user={user} />} />
-            <Route path='/myaccount' element={<Account user={user} userInfo={userInfo} />} />
-            <Route path='/user/:username' element={<OtherAccount user={user} mainUserInfo={userInfo} />} />
+            {!user && <Route element={<Account user={user} userInfo={userInfo} />} />}
+            {!user && <Route element={<OtherAccount user={user} mainUserInfo={userInfo} />} />}
+            {user && <Route path='/myaccount' element={<Account user={user} userInfo={userInfo} />} />}
+            {user && <Route path='/user/:username' element={<OtherAccount user={user} mainUserInfo={userInfo} />} />}
         </Routes>
         <Register />
         <Login />

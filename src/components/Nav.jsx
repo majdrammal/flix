@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import logo from '../assets/logo.png'
-import { signOut } from 'firebase/auth';
 import { Link } from 'react-router-dom';
 import { auth } from '../firebase-config';
 import { onAuthStateChanged } from 'firebase/auth';
 import NavMenu from './ui/NavMenu';
-
+import { logout } from '../Functions'
 
 const Nav = () => {
 
@@ -16,12 +15,6 @@ const Nav = () => {
         document.querySelector(".App").classList += ` ${modal}__open`
         document.querySelector(".error__register").innerHTML = ""
         document.querySelector(".error__login").innerHTML = ""
-    }
-
-    function logout() {
-        signOut(auth)
-        setUser(null)
-        document.querySelector(".App").classList = ("App")
     }
 
     useEffect(() => {

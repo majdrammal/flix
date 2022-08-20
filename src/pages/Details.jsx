@@ -55,6 +55,7 @@ const Details = ({ user }) => {
 
     useEffect(() => {
         document.querySelector("body").classList.remove("remove__bg")
+        window.scrollTo(0, 0)
     }, [])
 
     let navigate = useNavigate()

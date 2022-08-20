@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom'
-import { signOut } from 'firebase/auth';
+import { logout } from '../../Functions'; 
 
-const NavMenu = ({ user, auth }) => {
+const NavMenu = ({ user }) => {
 
     let navigate = useNavigate()
 
@@ -23,11 +23,6 @@ const NavMenu = ({ user, auth }) => {
         document.body.classList.remove('nav__menu--open')
         document.querySelector(".error__register").innerHTML = ""
         document.querySelector(".error__login").innerHTML = ""
-    }
-
-    function logout() {
-        signOut(auth)
-        document.querySelector(".App").classList = ("App")
     }
 
     function goToAccount() {
