@@ -904,13 +904,13 @@ nav {
   justify-content: center;
   position: relative;
   transition: all 300ms ease-in;
-  background-image: url("./assets/modal-bg.jpg");
   color: white;
   transform: scale(0);
 }
 
 .register__open .register__container, .login__open .login__container, .username__overlay .user__details--container {
   transform: scale(1);
+  background-image: url("./assets/modal-bg.jpg");
 }
 
 .username__overlay #user__details {
