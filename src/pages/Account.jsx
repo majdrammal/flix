@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { getDoc, doc } from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom';
 import { db } from '../firebase-config';
 import { collection, getDocs, query, where } from 'firebase/firestore'
@@ -8,6 +7,7 @@ import Copyright from '../components/Copyright';
 import LikedMovie from '../components/ui/LikedMovie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Following from '../components/ui/Following';
+import { getFollows, getLikes, getUserById } from '../Functions';
 
 const Account = ({ user }) => {
 
@@ -20,36 +20,22 @@ const Account = ({ user }) => {
     const [userInfo, setUserInfo] = useState()
 
     async function getLikedMovies() {
-        const likeCollectionRef = await query(
-          collection(db, "likes"),
-          where("uid", "==", user.uid)
-        )
-        const { docs } = await getDocs(likeCollectionRef)
-        setLikedMovies(docs.map(doc => doc.data()))
+        setLikedMovies(await getLikes(user.uid))
         getFollowing()
     }
 
     async function getFollowing() {
-        if (user) { 
-            const friendsCollectionRef = await query(
-              collection(db, "friends"),
-              where("followerUid", "==", user.uid)
-            )
-            const { docs } = await getDocs(friendsCollectionRef)
-            setFollowing(docs.map(doc => doc.data()))
-            setLoading(false)
-        }
+        setFollowing(await getFollows(user, user.uid))
+        setLoading(false)
     }
 
-    async function getUserById() {
-        const userRef = doc(db, "users", user.uid)
-        const userSnap = await getDoc(userRef)
-        setUserInfo(userSnap.data())
-      }
+    async function getUserDetails() {
+        setUserInfo(await getUserById(user.uid))
+    }
 
     useEffect(() => {
         getLikedMovies()
-        getUserById()
+        getUserDetails()
     }, [user])
 
     useEffect(() => {

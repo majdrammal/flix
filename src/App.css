@@ -511,16 +511,17 @@ nav {
   margin-top: 20px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   flex-wrap: wrap;
   padding-bottom: 60px;
 }
 
 .movie {
-  width: 22.5%;
+  min-width: 275px;
+  max-width: 275px;
   background-color: rgba(26, 26, 26, 0.75); /* rgba(128, 128, 128, 0.144) */
   border: 1px solid rgba(211, 211, 211, 0.134);
-  margin: 0 30px 30px 0;
+  margin: 0 15px 30px 0;
   transition: all 600ms ease;
   cursor: pointer;
   position: relative;
@@ -607,7 +608,7 @@ nav {
 /* SKELETON */
 
 .movie__skeleton {
-  width: 22.5%;
+  width: 275px;
   margin: 0 30px 30px 0;
   display: flex;
   flex-direction: column;
@@ -1070,7 +1071,7 @@ nav {
 */
 
 #account {
-  background-image: url("./assets/account-bg.jpg");
+  background: linear-gradient(90deg, rgba(15,15,15,1) 0%, rgba(33,33,33,1) 48%, rgba(18,18,18,1) 100%);
   min-height: 100vh;
   position: relative;
 }
@@ -1367,10 +1368,6 @@ nav {
 
   /* BROWSE */
 
-  .movie, .movie__skeleton {
-    width: 40%;
-  }
-
   /* DETAILS */
 
   .details__container {
@@ -1505,7 +1502,6 @@ nav {
   /* BROWSE */
 
   .movie {
-    width: 100%;
     margin: 0 0 30px 0;
   }
 

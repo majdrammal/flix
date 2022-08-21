@@ -7,6 +7,7 @@ import Nav from '../components/Nav';
 import LikedMovie from '../components/ui/LikedMovie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Following from '../components/ui/Following';
+import { checkIfFollowed, getFollows, getLikes } from '../Functions';
 
 const OtherAccount = ({ user, mainUserInfo }) => {
 
@@ -30,16 +31,13 @@ const OtherAccount = ({ user, mainUserInfo }) => {
         const { docs } = await getDocs(userRef)
         setUserInfo(docs.map(doc => doc.data()))
         setId(docs[0]._key.path.segments[6])
-        getLikes(docs[0]._key.path.segments[6])
+        getLikedMovies(docs[0]._key.path.segments[6])
     }
 
-    async function getLikes(id) {
-        const likeCollectionRef = await query(
-            collection(db, "likes"),
-            where("uid", "==", id)
-        )
-        const { docs}  = await getDocs(likeCollectionRef)
-        setLikedMovies(docs.map(doc => doc.data()))
+    console.log(userInfo)
+
+    async function getLikedMovies(id) {
+        setLikedMovies(await getLikes(id))
         getFollowing()
     }
 
@@ -63,29 +61,15 @@ const OtherAccount = ({ user, mainUserInfo }) => {
     }
 
     async function checkIfUserIsFollowed() {
-        if (user) { 
-        const friendsCollectionRef = await query(
-          collection(db, "friends"),
-          where("followerUid", "==", user.uid)
-        )
-        const { docs } = await getDocs(friendsCollectionRef)
-        let followed = docs.map(doc => doc.data()).filter(e => e.followedUid == id)
+        let followed = await checkIfFollowed(user, user.uid, id)
         followed.length !== 0 ? setFollowed(true) : setFollowed(false)
-        }
     }
 
     async function getFollowing() {
-        if (user) { 
-            const friendsCollectionRef = await query(
-              collection(db, "friends"),
-              where("followerUid", "==", id)
-            )
-            const { docs } = await getDocs(friendsCollectionRef)
-            setFollowing(docs.map(doc => doc.data()))
-            if (username === mainUserInfo.username) {
+        setFollowing(await getFollows(user, id))
+        setLoading(false)
+        if (username === mainUserInfo.username) {
             navigate('/myaccount')
-            }
-            setLoading(false)
         }
     }
 

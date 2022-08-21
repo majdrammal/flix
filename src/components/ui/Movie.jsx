@@ -5,7 +5,6 @@ const Movie = ({ img, title, id, type }) => {
 
     let navigate = useNavigate()
 
-
     function storeId( passedId, passedType ) {
         localStorage.setItem('id', passedId);
         localStorage.setItem('type', passedType);

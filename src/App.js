@@ -13,6 +13,7 @@ import Account from './pages/Account';
 import UserDetails from './components/UserDetails';
 import OtherAccount from './pages/otherAccount';
 import Welcome from './components/Welcome';
+import { getUserById } from './Functions';
 
 function App() {
 
@@ -24,7 +25,8 @@ function App() {
           // setLoading(false)
           if (user) {
           setUser(user) 
-          const currentState = await getUserById(user.uid)
+          let currentState = await getUserById(user.uid)
+          setUserInfo(currentState)
           setDoc(doc(db, 'users', user.uid), {
               ... currentState,
               email: user.email,
@@ -33,13 +35,6 @@ function App() {
           }
         })
   }, [user]) 
-
-  async function getUserById(id) {
-    const userRef = doc(db, "users", id)
-    const userSnap = await getDoc(userRef)
-    setUserInfo(userSnap.data())
-    return userSnap.data()
-  }
 
   useEffect(() => {
     document.querySelector("#root").classList += " welcome__open"

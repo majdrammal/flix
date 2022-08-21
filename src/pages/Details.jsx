@@ -10,6 +10,7 @@ import metacritic from '../assets/metacritic.png'
 import { db } from '../firebase-config';
 import { collection, getDocs, getDoc, doc, setDoc, query, where, deleteDoc } from 'firebase/firestore'
 import MovieInfoSkeleton from '../components/ui/MovieInfoSkeleton';
+import { getUserById } from '../Functions';
 
 const Details = ({ user }) => {
 
@@ -80,12 +81,6 @@ const Details = ({ user }) => {
             image: movieDetails.Poster
           })
     }
-
-    async function getUserById(id) {
-        const picRef = doc(db, "users", id)
-        const picSnap = await getDoc(picRef)
-        return picSnap.data()
-      }
 
     return (
         <div id="details">
