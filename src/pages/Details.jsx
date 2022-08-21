@@ -79,7 +79,8 @@ const Details = ({ user }) => {
         setDoc(doc(db, 'users', user.uid), {
             ... currentState,
             image: movieDetails.Poster
-          })
+        })
+        // REMEMBER: update profile pic for all followers as well 
     }
 
     return (

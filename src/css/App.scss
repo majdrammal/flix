@@ -7,12 +7,26 @@
   font-family: 'Teko', sans-serif;
 }
 
+@mixin flexHorizontalCenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+$purple: rgb(94, 86, 212);
+$red: rgb(212, 86, 86);
+$blackish: #242424; 
+$blackBoxShadow: rgb(0, 0, 0, 0.55);
+$blue: #499cf0;
+$white: rgb(255, 255, 255);
+$skeleton: rgba(211, 211, 211, 0.747);
+
 html {
   scroll-behavior: smooth;
 }
 
 #root {
-  background-image: url("./assets/root-bg.jpg");
+  background-image: url("../assets/root-bg.jpg");
   animation: movingBg 75000ms infinite linear;
   position: relative;
 }
@@ -32,9 +46,7 @@ html {
   font-size: 25px;
   display: none;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: white;
+  color: $white;
   text-transform: uppercase;
   transition: all 300ms ease;
 }
@@ -51,7 +63,7 @@ html {
   position: absolute;
   top: 0;
   left: 0;
-  background-color: white;
+  background-color: $white;
   height: 100%;
   animation: loadingBar 2000ms ;
   animation-fill-mode: forwards;
@@ -68,7 +80,7 @@ html {
 }
 
 .welcome__open .welcome{
-  display: flex;
+  @include flexHorizontalCenter();
   left: 0;
 }
 
@@ -104,13 +116,13 @@ a:hover {
 }
 
 a {
-  color: white;
+  color: $white;
   text-decoration: none;
   transition: all 600ms ease;
 }
 
 a:visited {
-  color: white;
+  color: $white;
 }
 
 button, .logout__btn, .profile__btn {
@@ -122,10 +134,8 @@ button, .logout__btn, .profile__btn {
   font-size: 20px;
   font-weight: bold;
   z-index: 1;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  color: $white;
+  @include flexHorizontalCenter();
   transition: all 600ms ease;
   cursor: pointer;
   opacity: 0.7;
@@ -134,8 +144,8 @@ button, .logout__btn, .profile__btn {
 button:hover, .logout__btn:hover {
   transform: scale(0.95);
   opacity: 1;
-  background-color: rgb(94, 86, 212);
-  color: white;
+  background-color: $purple;
+  color: $white;
 }
 
 .smaller {
@@ -151,7 +161,7 @@ button:hover, .logout__btn:hover {
 
 * {
   scrollbar-width: auto;
-  scrollbar-color: #515151 #242424;
+  scrollbar-color: #515151 $blackish;
 }
 
 *::-webkit-scrollbar {
@@ -159,7 +169,7 @@ button:hover, .logout__btn:hover {
 }
 
 *::-webkit-scrollbar-track {
-  background: #242424;
+  background: $blackish;
 }
 
 *::-webkit-scrollbar-thumb {
@@ -194,8 +204,7 @@ nav {
   cursor: pointer;
   height: 60px;
   width: 170px;
-  display: flex;
-  align-items: center;
+  @include flexHorizontalCenter();
 }
 
 .logo {
@@ -206,21 +215,17 @@ nav {
 }
 
 .nav__right {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    @include flexHorizontalCenter();
 }
 
 .social__link {
   font-size: 30px;
-  color: white;
+  color: $white;
   z-index: 1;
   margin-right: 20px;
   opacity: 0.7;
   transition: all 300ms ease;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flexHorizontalCenter();
 }
 
 .login__btn {
@@ -228,7 +233,7 @@ nav {
 }
 
 .signup__btn {
-  background-color: rgb(212, 86, 86);
+  background-color: $red;
 }
 
 .profile__btn {
@@ -248,7 +253,7 @@ nav {
   width: 60px;
   height: 3px;
   margin: 12px 0 12px 16px; 
-  background-color: white;
+  background-color: $white;
   transition: all 300ms ease;
 }
 
@@ -274,10 +279,8 @@ nav {
   height: 100vh;
   width: 100%;
   background-color: #151515;
-  display: flex;
+  @include flexHorizontalCenter();
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   visibility: hidden;
   transition: all 1000ms ease;
 }
@@ -292,7 +295,7 @@ nav {
 .nav__menu--open .nav__menu--link {
   opacity: 1;
   display: block;
-  color: white;
+  color: $white;
   margin: 40px 0;
   font-size: 40px;
   transition: all 1200ms ease;
@@ -319,7 +322,7 @@ nav {
 }
 
 .dark__cover {
-  background-color: #242424;
+  background-color: $blackish;
   position: absolute;
   top: 0;
   left: 0;
@@ -335,7 +338,7 @@ nav {
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
-  border: 0.5px solid white;
+  border: 0.5px solid $white;
   height: 40px;
   width: 20px;
   border-radius: 50px;
@@ -345,7 +348,7 @@ nav {
 }
 
 .scroll {
-  background-color: white;
+  background-color: $white;
   height: 6px;
   width: 3px;
   border-radius: 50px;
@@ -373,17 +376,15 @@ nav {
   left: 50%;
   height: 100vh;
   transform: translateX(-50%);
-  display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  @include flexHorizontalCenter();
   width: 60%;
   margin: 0 auto;
   transition: all 1500ms ease;
 }
 
 .home__main--title {
-  color: white;
+  color: $white;
   text-align: center;
   font-size: 40px;
   margin-bottom: 5px;
@@ -399,13 +400,13 @@ nav {
   padding: 0 80px 0 20px !important;
   border-radius: 50px;
   font-size: 26px;
-  background-color: white;
+  background-color: $white;
   z-index: 1;
   position: relative;
 }
 
 .search__icon {
-  color: rgb(212, 86, 86);
+  color: $red;
   font-size: 35px;
   position: absolute;
   right: 0;
@@ -418,16 +419,14 @@ nav {
 }
 
 .search__icon:hover {
-  color: rgb(94, 86, 212);
+  color: $purple;
   font-size: 32.5px;
 }
 
 .home__main--registration {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   z-index: 1;
   margin-top: 5px;
+  @include flexHorizontalCenter();
 }
 
 .home__main--login, .home__main--create {
@@ -462,7 +461,7 @@ nav {
 }
 
 .copyright__text {
-  color: white;
+  color: $white;
   opacity: 0.4;
   letter-spacing: 1px;
   text-align: center;
@@ -486,10 +485,8 @@ nav {
 
 .browse__search {
   padding-top: 10px;
-  display: flex;
+  @include flexHorizontalCenter();
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   width: 60%;
   margin: 0 auto;
 }
@@ -497,7 +494,7 @@ nav {
 .browse__results {
   margin-top: 10px;
   font-size: 30px;
-  color: white;
+  color: $white;
   opacity: 0.7;
 }
 
@@ -520,7 +517,7 @@ nav {
   min-width: 275px;
   max-width: 275px;
   background-color: rgba(26, 26, 26, 0.75); /* rgba(128, 128, 128, 0.144) */
-  border: 1px solid rgba(211, 211, 211, 0.134);
+  border: 1px solid $skeleton;
   margin: 0 15px 30px 0;
   transition: all 600ms ease;
   cursor: pointer;
@@ -555,7 +552,7 @@ nav {
 
 .movie__title {
   font-size: 20px;
-  color: white;
+  color: $white;
   margin: 0 10px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -567,7 +564,7 @@ nav {
 .movie__type {
   text-transform: capitalize;
   opacity: 0.4;
-  color: white;
+  color: $white;
   margin: 0 10px;
   text-align: center;
   transition: all 400ms ease;
@@ -582,9 +579,7 @@ nav {
   height: 0px;
   opacity: 0;
   transition: height 700ms ease, opacity 600ms ease;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flexHorizontalCenter();
 }
 
 .movie__more--text {
@@ -618,13 +613,13 @@ nav {
 .movie__img--skeleton {
   width: 100%;
   height: 320px;
-  background-color: rgba(211, 211, 211, 0.747);
+  background-color: $skeleton;
 }
 
 .movie__title--skeleton {
   width: 50%;
   height: 20px;
-  background-color: rgba(211, 211, 211, 0.531);
+  background-color: $skeleton;
   z-index: 1;
   text-align: center;
   margin: 0 auto;
@@ -634,7 +629,7 @@ nav {
 .movie__year--skeleton {
   width: 30%;
   height: 15px;
-  background-color: rgba(211, 211, 211, 0.531);
+  background-color: $skeleton;
   text-align: center;
   z-index: 1;
   margin: 0 auto;
@@ -674,12 +669,10 @@ nav {
 
 .back {
   width: 10%;
-  display: flex;
+  @include flexHorizontalCenter();
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   cursor: pointer;
-  color: white;
+  color: $white;
   margin-bottom: 50px;
 }
 
@@ -696,22 +689,20 @@ nav {
 }
 
 .back:hover .back__text {
-  color: rgb(212, 86, 86);
+  color: $red;
 }
 
 .back:hover .fa-left-long {
   transform: scale(1.2);
-  color: rgb(212, 86, 86)
+  color: $red;
 }
 
 .movie__details {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flexHorizontalCenter();
   width: 90%;
   margin: 0 auto;
   padding: 50px 0;
-  color: white;
+  color: $white;
   border: 1px solid rgba(15, 15, 15, 0.048); 
   background-color: #141414c2;
   margin-bottom: 5px;
@@ -763,9 +754,7 @@ nav {
 }
 
 .imdb__anchor, .rotten__rating, .metascore__rating {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flexHorizontalCenter();
   font-size: 30px;
   font-weight: 300;
 }
@@ -781,7 +770,7 @@ nav {
 .metascore__logo {
   width: 40px;
   height: 40px;
-  background-color: white;
+  background-color: $white;
   border-radius: 50%;
 }
 
@@ -798,50 +787,48 @@ nav {
 /* DETAILS SKELETON */
 
 .movie__details--skeleton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flexHorizontalCenter();
   width: 90%;
   margin: 0 auto;
-  color: white;
+  color: $white;
 }
 
 .movie__details--img--skeleton {
   height: 400px;
   width: 260px;
-  background-color: rgba(211, 211, 211, 0.668);
+  background-color: $skeleton;
 }
 
 .movie__details--title--skeleton {
   width: 200px;
   height: 30px;
-  background-color: rgba(211, 211, 211, 0.668);
+  background-color: $skeleton;
 }
 
 .movie__details--year--skeleton {
   width: 100px;
   height: 15px;
-  background-color: rgba(211, 211, 211, 0.668);
+  background-color: $skeleton;
   margin: 30px 0 60px 0;
 }
 
 .movie__details--plot-skeleton {
   width: 400px;
   height: 60px;
-  background-color: rgba(211, 211, 211, 0.668);
+  background-color: $skeleton;
 }
 
 .movie__details--info--skeleton {
   width: 160px;
   height: 100px;
-  background-color: rgba(211, 211, 211, 0.668);
+  background-color: $skeleton;
   margin: 40px 0;
 }
 
 .movie__details--ratings--skeleton {
   width: 100px; 
   height: 15px;
-  background-color: rgba(211, 211, 211, 0.668);
+  background-color: $skeleton;
 }
 
 .like__button {
@@ -855,11 +842,11 @@ nav {
 }
 
 .like__button:hover {
-  color: rgb(212, 86, 86)
+  color: $red;
 }
 
 .like__button--clicked .like__button {
-  color: rgb(212, 86, 86);
+  color: $red;
 }
 
 /* 
@@ -893,7 +880,7 @@ nav {
 
 .register__open #register, .login__open #login {
   z-index: 60;
-  box-shadow: 0 20px 80px 0 rgb(0, 0, 0, 0.55);
+  box-shadow: 0 20px 80px 0 $blackBoxShadow;
   visibility: visible;
 }
 
@@ -905,18 +892,18 @@ nav {
   justify-content: center;
   position: relative;
   transition: all 300ms ease-in;
-  color: white;
+  color: $white;
   transform: scale(0);
 }
 
 .register__open .register__container, .login__open .login__container, .username__overlay .user__details--container {
   transform: scale(1);
-  background-image: url("./assets/modal-bg.jpg");
+  background-image: url("../assets/modal-bg.jpg");
 }
 
 .username__overlay #user__details {
   z-index: 60;
-  box-shadow: 0 20px 80px 0 rgb(0, 0, 0, 0.55);
+  box-shadow: 0 20px 80px 0 $blackBoxShadow;
   visibility: visible;
 }
 
@@ -933,10 +920,8 @@ nav {
 }
 
 .register__form, .login__form, .user__details--form {
-  display: flex;
+  @include flexHorizontalCenter();
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   width: 100%;
   z-index: 1;
 }
@@ -950,7 +935,7 @@ nav {
 .input {
   width: 100%;
   background-color: transparent;
-  color: white;
+  color: $white;
   outline: none; 
   border: 2px solid #c0c4cc;
   border-top: none;
@@ -966,7 +951,7 @@ nav {
 }
 
 .input:focus {
-  border-color: #499cf0;
+  border-color: $blue;
 }
 
 .form__item {
@@ -981,9 +966,9 @@ nav {
 .form__submit {
   border-radius: 10px;
   cursor: pointer;
-  background-color: #499cf0;
-  border: 2px solid #499cf0;
-  color: white;
+  background-color: $blue;
+  border: 2px solid $blue;
+  color: $white;
   font-weight: bold;
   font-size: 20px;
   width: 100%;
@@ -995,13 +980,13 @@ nav {
 }
 
 .form__submit:hover {
-  border-color: white;
+  border-color: $white;
   background-color: transparent;
 }
 
 .form__submit:active {
-  border-color: #499cf0;
-  color: #499cf0;
+  border-color: $blue;
+  color: $blue;
 }
 
 .register__overlay, .login__overlay {
@@ -1016,7 +1001,7 @@ nav {
 }
 
 .register__overlay--loading, .login__overlay--loading {
-  background-color: #242424;
+  background-color: $blackish;
   font-size: 80px;
   z-index: -1;
 }
@@ -1053,7 +1038,7 @@ nav {
   position: absolute;
   top: 30px;
   right: 40px;
-  color: white;
+  color: $white;
   font-size: 36px;
   z-index: 100;
   cursor: pointer;
@@ -1107,7 +1092,7 @@ nav {
 }
 
 .search__friends {
-  color: white;
+  color: $white;
   font-size: 25px;
   align-self: flex-start;
 }
@@ -1144,7 +1129,7 @@ nav {
 }
 
 .account__following--title:hover {
-  color: white;
+  color: $white;
 }
 
 .following__users {
@@ -1152,7 +1137,7 @@ nav {
   top: 110px;
   left: 0;
   min-width: 100%;
-  background-color: #242424;
+  background-color: $blackish;
   border: 1px solid rgba(166, 166, 166, 0.072);
   padding: 10px;
   padding-bottom: 0px;
@@ -1179,7 +1164,7 @@ nav {
 
 .following__user--username {
   font-size: 18px;
-  color: white;
+  color: $white;
   cursor: pointer;
   transition: all 400ms ease;
 }
@@ -1190,7 +1175,7 @@ nav {
 
 .following__closer {
   position: absolute;
-  color: white;
+  color: $white;
   top: 0;
   right: 0;
   margin: 5px 5px 0 0;
@@ -1209,8 +1194,8 @@ nav {
 
 .is__followed {
   opacity: 1;
-  background-color: rgb(94, 86, 212);
-  color: white;
+  background-color: $purple;
+  color: $white;
 }
 
 .account__img--wrapper {
@@ -1228,7 +1213,7 @@ nav {
 }
 
 .account__name {
-  color: white;
+  color: $white;
   font-size: 54px;
   line-height: 4rem;
 }
@@ -1254,7 +1239,7 @@ nav {
 } 
 
 .account__about--title, .account__likes--title {
-  color: white;
+  color: $white;
   font-size: 35px;
 }
 
@@ -1272,9 +1257,7 @@ nav {
 
 .liked__movie {
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flexHorizontalCenter();
   width: 140px;
   margin-right: 30px;
   height: 185px;
@@ -1308,7 +1291,7 @@ nav {
 }
 
 .liked__movie--title {
-  color: white;
+  color: $white;
   z-index: 1;
   opacity: 0;
   text-align: center;
@@ -1327,12 +1310,12 @@ nav {
 }
 
 .account__comments--title {
-  color: white;
+  color: $white;
   font-size: 35px;
 }
 
 .comment {
-  color: white;
+  color: $white;
 }
 
 /* 

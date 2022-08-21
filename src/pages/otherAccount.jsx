@@ -33,9 +33,7 @@ const OtherAccount = ({ user, mainUserInfo }) => {
         setId(docs[0]._key.path.segments[6])
         getLikedMovies(docs[0]._key.path.segments[6])
     }
-
-    console.log(userInfo)
-
+    
     async function getLikedMovies(id) {
         setLikedMovies(await getLikes(id))
         getFollowing()
