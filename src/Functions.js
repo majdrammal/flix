@@ -43,3 +43,15 @@ export async function getUserById(id) {
     const picSnap = await getDoc(picRef)
     return picSnap.data()
 }
+
+// all users
+
+export async function getAllUsers(user) {
+    if (user) { 
+        const allRef = await query(
+          collection(db, "users")
+        )
+        const { docs } = await getDocs(allRef)
+        return docs.map(doc => doc.data()).map(user => user.username)
+    }
+} 

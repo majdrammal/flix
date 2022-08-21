@@ -1219,7 +1219,7 @@ nav {
   color: rgb(255, 255, 255);
 }
 
-.following__users {
+.following__users, .search__options {
   position: absolute;
   top: 110px;
   right: none;
@@ -1234,8 +1234,24 @@ nav {
   z-index: 5;
 }
 
+.search__options {
+  display: block;
+  top: 70px;
+  padding: 0 0 0 10px;
+  color: rgba(255, 255, 255, 0.685);
+}
+
 .following__users--other {
   top: 90px;
+}
+
+.option {
+  cursor: pointer;
+  transition: all 300ms ease;
+}
+
+.option:hover {
+  color: white;
 }
 
 .following__user {

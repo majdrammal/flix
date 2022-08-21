@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { db } from '../firebase-config';
-import { collection, getDocs, query, where } from 'firebase/firestore'
 import Nav from '../components/Nav';
 import Copyright from '../components/Copyright';
 import LikedMovie from '../components/ui/LikedMovie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Following from '../components/ui/Following';
-import { getFollows, getLikes, getUserById } from '../Functions';
+import { getAllUsers, getFollows, getLikes, getUserById } from '../Functions';
 
 const Account = ({ user }) => {
 
@@ -15,11 +13,13 @@ const Account = ({ user }) => {
 
     const [likedMovies, setLikedMovies] = useState()
     const [loading, setLoading] = useState(true)
-    const [otherUsername, setOtherUsername] = useState()
+    const [otherUsername, setOtherUsername] = useState('')
     const [following, setFollowing] = useState([])
     const [userInfo, setUserInfo] = useState()
+    const [options, setOptions] = useState()
 
     async function getLikedMovies() {
+        setOptions(await getAllUsers(user))
         setLikedMovies(await getLikes(user.uid))
         getFollowing()
     }
@@ -63,7 +63,19 @@ const Account = ({ user }) => {
                     </div>
                     <div className="account__upper--right" onKeyPress={(event) => event.key === 'Enter' && navigate(`/user/${otherUsername}`)}>
                         <h3 className="search__friends">Search for users:</h3>
-                        <input type="text" placeholder="Search by username..." className="input search__friends--input" onChange={(event) => setOtherUsername(event.target.value)}/>
+                        <input type="text" placeholder="Search by username..." className="input search__friends--input" onChange={(event) => setOtherUsername(event.target.value)} />
+                        {
+                            otherUsername !== '' &&
+                            <div className="search__options">
+                                {
+                                    options.filter(user => user.includes(`${otherUsername.toLowerCase()}`)).slice(0,6).map(user => {
+                                        return (
+                                            <p className="option" onClick={() => navigate(`/user/${user}`)}>{user}</p>
+                                        )
+                                    })
+                                }
+                            </div>
+                        }
                         <div className="account__following">
                             <span className="smaller account__following--title" onClick={() => following.length !== 0 && (document.querySelector(".account__following").classList += " following__open")}>Following: {following.length}</span>
                             <div className="following__users">
