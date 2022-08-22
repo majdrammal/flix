@@ -32,10 +32,10 @@ const Nav = () => {
                     <img src={logo} alt="" className="logo" />
                 </Link>
                 <div className="nav__right">
-                    <a href="https://www.google.com" target="_blank" className="social__link">
+                    <a target="_blank" className="social__link">
                         <FontAwesomeIcon icon="fa-brands fa-instagram" />
                     </a>
-                    <a href="https://www.google.com" target="_blank" className="social__link">
+                    <a target="_blank" className="social__link">
                         <FontAwesomeIcon icon="fa-brands fa-twitter"/>
                     </a>
                     {!user && <button className="login__btn" onClick={() => modalOpen('login')}>Log In</button>}

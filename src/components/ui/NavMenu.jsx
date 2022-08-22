@@ -53,8 +53,8 @@ const NavMenu = ({ user }) => {
                 user &&
                 <a href="/" className="nav__menu--link" onClick={logout}>Logout</a>
             }
-            <a href="www.google.com" className="nav__menu--link">Instagram</a>
-            <a href="www.google.com" className="nav__menu--link">Twitter</a>
+            <a className="nav__menu--link">Instagram</a>
+            <a className="nav__menu--link">Twitter</a>
         </div>
         </>
     );

@@ -240,6 +240,7 @@ nav {
 }
 
 .social__link {
+  cursor: not-allowed;
   font-size: 30px;
   color: rgb(255, 255, 255);
   z-index: 1;
@@ -318,6 +319,7 @@ nav {
 }
 
 .nav__menu--open .nav__menu--link {
+  cursor: not-allowed;
   opacity: 1;
   display: block;
   color: rgb(255, 255, 255);
