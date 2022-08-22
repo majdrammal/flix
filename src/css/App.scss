@@ -368,9 +368,8 @@ nav {
 /* HOME MAIN */
 
 .home__main {
-  @include position(0, none, none, 50%);
-  height: 100vh;
-  transform: translateX(-50%);
+  @include position(50%, none, none, 50%);
+  transform: translate(-50%, -50%);
   @include flex(column, center);
   width: 60%;
   margin: 0 auto;
