@@ -12,6 +12,7 @@ import { checkIfFollowed, getFollows, getLikes } from '../Functions';
 const OtherAccount = ({ user, mainUserInfo }) => {
 
     const { username } = useParams()
+    const [mainUsernameImage, setMainUsernameImage] = useState()
 
     let navigate = useNavigate()
 
@@ -33,7 +34,7 @@ const OtherAccount = ({ user, mainUserInfo }) => {
         setId(docs[0]._key.path.segments[6])
         getLikedMovies(docs[0]._key.path.segments[6])
     }
-    
+
     async function getLikedMovies(id) {
         setLikedMovies(await getLikes(id))
         getFollowing()
@@ -43,8 +44,8 @@ const OtherAccount = ({ user, mainUserInfo }) => {
         if (!followed) {
             setDoc(doc(db, 'friends', id + user.uid), {
                 followerUid: user.uid,
-                followerUsername: mainUserInfo.username,
-                followerImage: mainUserInfo.image,
+                followerUsername: mainUsernameImage[0],
+                followerImage: mainUsernameImage[1],
                 followedUid: id,
                 followedUsername: username.toLowerCase(),
                 followedImage: userInfo[0].image
@@ -74,6 +75,7 @@ const OtherAccount = ({ user, mainUserInfo }) => {
     useEffect(() => {
             getUserByUsername()
             checkIfUserIsFollowed()
+            setMainUsernameImage(localStorage.getItem('mainUserInfo'))
     }, [id, username])
 
     useEffect(() => {

@@ -27,6 +27,7 @@ function App() {
           setUser(user) 
           let currentState = await getUserById(user.uid)
           setUserInfo(currentState)
+          localStorage.setItem('mainUserInfo', [currentState.username, currentState.image])
           setDoc(doc(db, 'users', user.uid), {
               ... currentState,
               email: user.email,
